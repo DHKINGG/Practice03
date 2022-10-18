@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_home"
+        android:enabled="true"
+        android:icon="@drawable/navi_home_icon"
+        android:title="home"/>
+
+    <item
+        android:id="@+id/menu_medical_history"
+        android:enabled="true"
+        android:title="menu_medical_history"
+        android:icon="@drawable/navi_medical_icon" />
+    <item
+        android:id="@+id/menu_my_page"
+        android:enabled="true"
+        android:title="menu_my_page"
+        android:icon="@drawable/navi_person_icon" />
+
+
+</menu>
