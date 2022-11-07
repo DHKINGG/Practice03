@@ -1,7 +1,10 @@
 package com.example.myapplication.Activity
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.Fragment.HomeFragment
 import com.example.myapplication.Fragment.MedicalHistoryFragment
@@ -17,6 +20,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+
+
 
         // transaction : 작업의 단위
         supportFragmentManager.beginTransaction().add(binding.flMainHome.id, HomeFragment())
@@ -34,7 +40,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+     fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(binding.flMainHome.id, fragment).commit()
     }
+
+
 }

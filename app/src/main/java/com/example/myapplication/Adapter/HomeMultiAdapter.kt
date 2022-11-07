@@ -2,20 +2,24 @@ package com.example.myapplication.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Activity.SearchActivity
 import com.example.myapplication.Model.HomeAd
 import com.example.myapplication.Model.HomeBottomAd
 import com.example.myapplication.Model.HomeReceipt
 import com.example.myapplication.Model.HomeWeekend
 import com.example.myapplication.databinding.*
+import com.google.android.material.tabs.TabLayoutMediator
+
 
 class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var adapterContext: Context
-    var list = mutableListOf<HomeAd>()
 
 
     var bookList = mutableListOf<HomeReceipt>()
@@ -37,6 +41,18 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class HomeAdHolder(private val binding: IvViewPagerBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
+            var viewPagerAdapter = HomeAdViewPagerAdapter()
+            viewPagerAdapter.list = homeAdList
+            viewPagerAdapter.setContext(adapterContext)
+            binding.vpViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            binding.vpViewPager.adapter = viewPagerAdapter
+
+
+
+
+
+            TabLayoutMediator(binding.tlIndicator, binding.vpViewPager) { tab, position -> }.attach()
+
 
         }
     }
@@ -44,6 +60,7 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class HomeFavoriteHolder(private val binding: IvFavoriteMultiBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
+
 
         }
     }
@@ -56,6 +73,8 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             recyclerAdapter.list = item
             recyclerAdapter.setContext(adapterContext)
             binding.rvHomeBook.adapter = recyclerAdapter
+
+
         }
     }
 
@@ -75,6 +94,10 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class HomeBottomAdHolder(private val binding: IvViewPager2Binding) : RecyclerView.ViewHolder(binding.root){
         fun bind(){
+            var viewPagerAdapter = HomeBottomViewPagerAdAdapter()
+            viewPagerAdapter.list = homeBottomAdList
+            binding.vpViewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+            binding.vpViewPager2.adapter = viewPagerAdapter
 
         }
     }
@@ -178,7 +201,7 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return 7
     }
 
     fun setContext(context: Context) {

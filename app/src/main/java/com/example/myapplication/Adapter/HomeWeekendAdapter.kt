@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Model.HomeWeekend
+import com.example.myapplication.Model.SearchHistoryModel
 import com.example.myapplication.databinding.IvWeekendHotspitalBinding
 
 class HomeWeekendAdapter : RecyclerView.Adapter<HomeWeekendAdapter.Holder>() {

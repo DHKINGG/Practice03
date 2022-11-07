@@ -33,6 +33,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
         binding.rvHome.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
+
         val adapter = HomeMultiAdapter()
         adapter.bookList = bookData
         adapter.homeAdList = homeAdData
@@ -46,9 +47,9 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
 
 
     private fun setHomeADData() {
-        homeAdData.add(HomeAd(mutableListOf(R.drawable.home_ad_1)))
-        homeAdData.add(HomeAd(mutableListOf(R.drawable.home_ad_2)))
-        homeAdData.add(HomeAd(mutableListOf(R.drawable.home_ad_3)))
+        homeAdData.add(HomeAd((R.drawable.home_ad_1)))
+        homeAdData.add(HomeAd((R.drawable.home_ad_1)))
+        homeAdData.add(HomeAd((R.drawable.home_ad_1)))
 
     }
 
@@ -127,10 +128,10 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
         )
     }
 
-    fun setBottomADData(){
-        homeBottomAdData.add(HomeBottomAd(mutableListOf(R.drawable.home_ad_1)))
-        homeBottomAdData.add(HomeBottomAd(mutableListOf(R.drawable.home_ad_2)))
-        homeBottomAdData.add(HomeBottomAd(mutableListOf(R.drawable.home_ad_3)))
+    private fun setBottomADData(){
+        homeBottomAdData.add(HomeBottomAd(R.drawable.home_ad_1))
+        homeBottomAdData.add(HomeBottomAd(R.drawable.home_ad_2))
+        homeBottomAdData.add(HomeBottomAd(R.drawable.home_ad_3))
     }
 
 }
