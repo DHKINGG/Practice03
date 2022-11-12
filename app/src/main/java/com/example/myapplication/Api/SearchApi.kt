@@ -18,7 +18,7 @@ import retrofit2.http.Query
 interface SearchApi {
     @GET("/3660000/AnimalHospitalListService/getAnimalHospitalList") // 기본 베이스 url 뒤에 들어가는 변경 사항들
     fun getSearchApi(
-        @Query("serviceKey") serviceKey: String,
+        @Query(value = "serviceKey", encoded = true) serviceKey: String,
         @Query("numOfRows") numOfRows: String,
         @Query("pageNo") pageNo: String,
         @Query("bplc_nm") bplc_nm: String

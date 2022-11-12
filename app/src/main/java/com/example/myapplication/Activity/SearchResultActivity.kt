@@ -34,7 +34,7 @@ class SearchResultActivity : AppCompatActivity() {
                 val responseSearch = response.body()
 
                 if (responseSearch!=null){
-                    Log.d("data" , responseSearch.resultList)
+                    Log.d("data" , responseSearch.resultList[0].hospitalName)
                 }
             }
 
