@@ -1,18 +1,34 @@
 package com.example.myapplication.Fragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
+import android.content.Context.LOCATION_SERVICE
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
+import android.provider.Settings
+import android.util.Log
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.location.LocationManagerCompat.isLocationEnabled
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.Activity.ApiUrlActivity
 import com.example.myapplication.Adapter.HomeMultiAdapter
-import com.example.myapplication.Model.HomeAd
-import com.example.myapplication.Model.HomeBottomAd
-import com.example.myapplication.Model.HomeReceipt
-import com.example.myapplication.Model.HomeWeekend
+import com.example.myapplication.Api.HomeBookApi
+import com.example.myapplication.Model.*
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
@@ -21,20 +37,23 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
     private var bookData = mutableListOf<HomeReceipt>()
     private var weekendData = mutableListOf<HomeWeekend>()
 
+    private var homeData = mutableListOf<HomeBookModel>()
+
+    private var adapter = HomeMultiAdapter()
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    val PERMISSION_ID = 42
+
 
 
     override fun initView() {
 
-        setBookData()
         setHomeADData()
-        setWeekendData()
         setBottomADData()
 
         binding.rvHome.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-
-        val adapter = HomeMultiAdapter()
         adapter.bookList = bookData
         adapter.homeAdList = homeAdData
         adapter.homeBottomAdList = homeBottomAdData
@@ -42,7 +61,30 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
         adapter.setContext(requireContext())
         binding.rvHome.adapter = adapter
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        getLastLocation()
 
+        getHomeBook()
+    }
+
+    private fun getHomeBook(){
+        val api = HomeBookApi.create()
+        api.getHomeBookApi(ApiUrlActivity.apiKey, "1", "8").enqueue(object : Callback<HospitalModel> {
+            override fun onResponse(call: Call<HospitalModel>, response: Response<HospitalModel>) {
+                val responseHomeBook = response.body()
+
+                if (responseHomeBook!=null){
+                    homeData = responseHomeBook.localDataModel.row
+
+                    adapter.homeBookList = homeData
+                    adapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onFailure(call: Call<HospitalModel>, t: Throwable) {
+                Log.d("data", t.message.toString())
+            }
+        })
     }
 
 
@@ -53,85 +95,67 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
 
     }
 
-
-    private fun setBookData() {
-        bookData.add(HomeReceipt("더한별이비인후과의원", "이비인후과", "3km", "서울특별시 송파구 석촌동", "대기", "4명"))
-        bookData.add(HomeReceipt("킴스의원", "내과", "4km", "서울특별시 송파구 거여동", "바로", "진료"))
-        bookData.add(HomeReceipt("열린가정의학과의원", "가정의학과", "5km", "서울특별시 송파구 방이동", "바로", "진료"))
-        bookData.add(HomeReceipt("공앤송이비인후과의원", "이비인후과", "3km", "서울특별시 송파구 석촌동", "대기", "4명"))
-        bookData.add(HomeReceipt("미앤미의원", "이비인후과", "3km", "서울특별시 송파구 석촌동", "대기", "4명"))
-        bookData.add(HomeReceipt("서초맑은이비인후과의원", "이비인후과", "3km", "서울특별시 송파구 석촌동", "대기", "4명"))
-        bookData.add(HomeReceipt("서울유의원", "이비인후과", "3km", "서울특별시 송파구 석촌동", "대기", "4명"))
-
-    }
-
-    private fun setWeekendData() {
-        weekendData.add(
-            HomeWeekend(
-                "송파성모정신겅강의학과의원",
-                "정신건강의학과",
-                "2km",
-                "서울특별시 송파구 문정동",
-                "30분 내 ",
-                "진료"
-            )
-        )
-        weekendData.add(
-            HomeWeekend(
-                "송파성모정신겅강의학과의원",
-                "정신건강의학과",
-                "2km",
-                "서울특별시 송파구 문정동",
-                "30분 내 ",
-                "진료"
-            )
-        )
-        weekendData.add(
-            HomeWeekend(
-                "송파성모정신겅강의학과의원",
-                "정신건강의학과",
-                "2km",
-                "서울특별시 송파구 문정동",
-                "30분 내 ",
-                "진료"
-            )
-        )
-        weekendData.add(
-            HomeWeekend(
-                "송파성모정신겅강의학과의원",
-                "정신건강의학과",
-                "2km",
-                "서울특별시 송파구 문정동",
-                "30분 내 ",
-                "진료"
-            )
-        )
-        weekendData.add(
-            HomeWeekend(
-                "송파성모정신겅강의학과의원",
-                "정신건강의학과",
-                "2km",
-                "서울특별시 송파구 문정동",
-                "30분 내 ",
-                "진료"
-            )
-        )
-        weekendData.add(
-            HomeWeekend(
-                "송파성모정신겅강의학과의원",
-                "정신건강의학과",
-                "2km",
-                "서울특별시 송파구 문정동",
-                "30분 내 ",
-                "진료"
-            )
-        )
-    }
-
     private fun setBottomADData(){
         homeBottomAdData.add(HomeBottomAd(R.drawable.home_ad_1))
         homeBottomAdData.add(HomeBottomAd(R.drawable.home_ad_2))
         homeBottomAdData.add(HomeBottomAd(R.drawable.home_ad_3))
     }
 
+    private fun checkPermissions(): Boolean {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+        return false
+    }
+
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
+            PERMISSION_ID
+        )
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        var locationManager: LocationManager = requireContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLastLocation() {
+        if (checkPermissions()) {
+            if (isLocationEnabled()) {
+                fusedLocationClient.lastLocation.addOnCompleteListener(requireActivity()) { task ->
+                    var location: Location = task.result
+                    if (location != null) {
+                        Log.d("location", location.latitude.toString())
+                        Log.d("location", location.longitude.toString())
+
+                        adapter.location = location
+                    }
+                }
+            }
+        } else {
+            requestPermissions()
+        }
+    }
+
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (requestCode == PERMISSION_ID) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                getLastLocation()
+            }
+        }
+    }
 }

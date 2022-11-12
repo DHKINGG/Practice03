@@ -2,6 +2,7 @@ package com.example.myapplication.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.location.Location
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,10 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Activity.SearchActivity
-import com.example.myapplication.Model.HomeAd
-import com.example.myapplication.Model.HomeBottomAd
-import com.example.myapplication.Model.HomeReceipt
-import com.example.myapplication.Model.HomeWeekend
+import com.example.myapplication.Model.*
 import com.example.myapplication.databinding.*
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -26,6 +24,9 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var weekendList = mutableListOf<HomeWeekend>()
     var homeBottomAdList = mutableListOf<HomeBottomAd>()
     var homeAdList = mutableListOf<HomeAd>()
+    var homeBookList = mutableListOf<HomeBookModel>()
+
+    lateinit var location: Location
 
     inner class HeaderSearchHolder(private val binding: IvHomeHeaderMulitBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -66,15 +67,14 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     inner class HomeBookHolder(private val binding: IvBookHospitalMultiBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(item: MutableList<HomeReceipt>){
+        fun bind(item: MutableList<HomeBookModel>){
             binding.rvHomeBook.layoutManager =
                 LinearLayoutManager(adapterContext, LinearLayoutManager.HORIZONTAL, false)
             val recyclerAdapter = HomeBookAdapter()
             recyclerAdapter.list = item
             recyclerAdapter.setContext(adapterContext)
             binding.rvHomeBook.adapter = recyclerAdapter
-
-
+            recyclerAdapter.location = location
         }
     }
 
@@ -192,7 +192,7 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             0 -> (holder as HeaderSearchHolder).bind()
             1-> (holder as HomeAdHolder).bind()
             2-> (holder as HomeFavoriteHolder).bind()
-            3-> (holder as HomeBookHolder).bind(bookList)
+            3-> (holder as HomeBookHolder).bind(homeBookList)
             4-> (holder as HomeWeekendHolder).bind(weekendList)
             5-> (holder as HomeBottomAdHolder).bind()
             else -> (holder as HomePharmacyHolder).bind()
@@ -207,6 +207,4 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun setContext(context: Context) {
         adapterContext = context
     }
-
-
 }
