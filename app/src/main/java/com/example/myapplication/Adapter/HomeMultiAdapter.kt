@@ -26,8 +26,6 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var homeAdList = mutableListOf<HomeAd>()
     var homeBookList = mutableListOf<HomeBookModel>()
 
-    lateinit var location: Location
-
     inner class HeaderSearchHolder(private val binding: IvHomeHeaderMulitBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
@@ -74,7 +72,6 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             recyclerAdapter.list = item
             recyclerAdapter.setContext(adapterContext)
             binding.rvHomeBook.adapter = recyclerAdapter
-            recyclerAdapter.location = location
         }
     }
 

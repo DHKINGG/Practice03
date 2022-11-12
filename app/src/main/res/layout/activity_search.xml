@@ -28,6 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:id="@+id/edt_search_hospital"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginLeft="20dp"

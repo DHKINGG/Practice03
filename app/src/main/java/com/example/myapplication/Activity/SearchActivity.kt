@@ -1,7 +1,10 @@
 package com.example.myapplication.Activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.KeyEvent.KEYCODE_ENTER
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Adapter.SearchMultiAdapter
 import com.example.myapplication.Model.SearchHistoryModel
@@ -29,6 +32,17 @@ class SearchActivity : AppCompatActivity() {
         adapter.searchRecommendList = searchRecommendList
         adapter.searchHistoryList = searchHistoryList
         binding.rvSearch.adapter = adapter
+
+        binding.edtSearchHospital.setOnKeyListener { v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
+
+                val nextIntent = Intent(this,SearchResultActivity::class.java)
+                nextIntent.putExtra("Search_Keywords",binding.edtSearchHospital.text.toString())
+                startActivity(nextIntent)
+            }
+
+             true
+        }
     }
 
     private fun setRecommendList(){

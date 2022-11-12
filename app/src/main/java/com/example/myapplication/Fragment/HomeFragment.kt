@@ -140,8 +140,6 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
                     if (location != null) {
                         Log.d("location", location.latitude.toString())
                         Log.d("location", location.longitude.toString())
-
-                        adapter.location = location
                     }
                 }
             }
