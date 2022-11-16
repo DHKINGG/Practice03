@@ -31,8 +31,9 @@
             android:id="@+id/ll_medicine"
             android:layout_width="0dp"
             android:layout_height="140dp"
-            android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
             android:orientation="vertical">
 
             <ImageView
@@ -59,6 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="140dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -85,8 +87,9 @@
             android:id="@+id/ll_family"
             android:layout_width="0dp"
             android:layout_height="140dp"
-            android:layout_marginLeft="15dp"
             android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
             android:orientation="vertical">
 
             <ImageView
@@ -112,9 +115,9 @@
             android:id="@+id/ll_bones"
             android:layout_width="0dp"
             android:layout_height="140dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="10dp"
             android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:orientation="vertical">
 
             <ImageView
