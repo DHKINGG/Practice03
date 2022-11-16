@@ -35,7 +35,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
     private var homeAdData = mutableListOf<HomeAd>()
     private var homeBottomAdData = mutableListOf<HomeBottomAd>()
     private var bookData = mutableListOf<HomeReceipt>()
-    private var weekendData = mutableListOf<HomeWeekend>()
+    private var weekendData = mutableListOf<HomeBookModel>()
 
     private var homeData = mutableListOf<HomeBookModel>()
 
@@ -65,6 +65,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
         getLastLocation()
 
         getHomeBook()
+        getWeekend()
     }
 
     private fun getHomeBook(){
@@ -86,6 +87,28 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
             }
         })
     }
+
+    private fun getWeekend(){
+        val api = HomeBookApi.create()
+        api.getHomeBookApi(ApiUrlActivity.apiKey, "1", "8").enqueue(object : Callback<HospitalModel> {
+            override fun onResponse(call: Call<HospitalModel>, response: Response<HospitalModel>) {
+                val responseWeekend = response.body()
+
+                if (responseWeekend!=null){
+                    weekendData = responseWeekend.localDataModel.row
+
+                    adapter.weekendList = weekendData
+                    adapter.notifyDataSetChanged()
+                }
+            }
+
+            override fun onFailure(call: Call<HospitalModel>, t: Throwable) {
+                Log.d("data", t.message.toString())
+            }
+        })
+    }
+
+
 
 
     private fun setHomeADData() {

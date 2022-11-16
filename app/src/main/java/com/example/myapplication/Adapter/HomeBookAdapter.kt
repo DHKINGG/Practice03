@@ -34,7 +34,7 @@ class HomeBookAdapter : RecyclerView.Adapter<HomeBookAdapter.Holder>() {
             binding.tvBookHospitalName.text = item.hospitalName
             binding.tvHomeBookHospitalType.text = item.hospitalType
 //            binding.tvHomeHospitalDistance.text = item.hospitalDistance
-            binding.tvHomeBookHospitalAddress.text = item.hospitalAddress
+//            binding.tvHomeBookHospitalAddress.text = item.hospitalAddress
 //            binding.tvHomeBookHospitalTime1.text = item.waiting
 //            binding.tvHomeBookHospitalTime2.text = item.waiting2
 

@@ -1,27 +1,30 @@
 package com.example.myapplication.Adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Model.HomeBookModel
 import com.example.myapplication.Model.HomeWeekend
 import com.example.myapplication.Model.SearchHistoryModel
 import com.example.myapplication.databinding.IvWeekendHotspitalBinding
 
 class HomeWeekendAdapter : RecyclerView.Adapter<HomeWeekendAdapter.Holder>() {
 
-    var list = mutableListOf<HomeWeekend>()
+    var list = mutableListOf<HomeBookModel>()
     lateinit var adapterContext: Context
 
     inner class Holder(private val binding: IvWeekendHotspitalBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: HomeWeekend) {
+        fun bind(item: HomeBookModel) {
+            Log.d("hospitalname", item.hospitalName)
             binding.tvHospitalName.text = item.hospitalName
             binding.tvHomeHospitalType.text = item.hospitalType
-            binding.tvHomeBookHospitalDistance.text = item.hospitalDistance
-            binding.tvHomeHospitalAddress.text = item.HospitalLocation
-            binding.tvHomeBookHospitalMore.text = item.waiting
-            binding.tvHomeBookHospitalTime2.text = item.waiting2
+//            binding.tvHomeBookHospitalDistance.text = item.hospitalDistance
+//            binding.tvHomeHospitalAddress.text = item.HospitalLocation
+//            binding.tvHomeBookHospitalMore.text = item.waiting
+//            binding.tvHomeBookHospitalTime2.text = item.waiting2
 
 
 
@@ -44,6 +47,7 @@ class HomeWeekendAdapter : RecyclerView.Adapter<HomeWeekendAdapter.Holder>() {
     }
 
     override fun getItemCount(): Int {
+        Log.d("hospitalname", list.size.toString())
         return list.size
     }
 

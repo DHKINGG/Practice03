@@ -1,11 +1,14 @@
 package com.example.myapplication.Activity
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.Adapter.SearchResultMultiAdapter
 import com.example.myapplication.Api.SearchApi
-import com.example.myapplication.Model.HospitalModel
 import com.example.myapplication.Model.ResultCode
+import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.databinding.ActivitySearchResultBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -13,6 +16,9 @@ import retrofit2.Response
 
 class SearchResultActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySearchResultBinding
+    private var searchResultData = mutableListOf<SearchModel>()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,11 +26,24 @@ class SearchResultActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        val adapter = SearchResultMultiAdapter()
+        binding.rvSearchResult.layoutManager = LinearLayoutManager(this)
+        adapter.setContext(this)
+        adapter.searchResultList = searchResultData
+        binding.rvSearchResult.adapter = adapter
+
         // intent로 검색어 가져와서 getSearch호출
         val searchKeyWord2 = intent.getStringExtra("Search_Keywords")
         getSearch(searchKeyWord2.toString())
 
+        binding.ivSearchLeftArrow.setOnClickListener{
+            val intent = Intent(this, SearchActivity::class.java)
+            this.startActivity(intent)
+        }
+
     }
+
+
 
     private fun getSearch(searchKeyWord: String){
         val api = SearchApi.create()
@@ -33,8 +52,14 @@ class SearchResultActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ResultCode>, response: Response<ResultCode>) {
                 val responseSearch = response.body()
 
+                val adapter = SearchResultMultiAdapter()
+
                 if (responseSearch!=null){
-                    Log.d("data" , responseSearch.resultList[0].hospitalName)
+
+                    searchResultData = responseSearch.resultList
+                    adapter.searchResultList = searchResultData
+                    adapter.notifyDataSetChanged()
+
                 }
             }
 

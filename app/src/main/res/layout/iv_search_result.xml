@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_hospital_book"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_home_book_plus_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/home_weekend_plus_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tv_search_result_receipt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="15dp"
+                android:text="접수"
+                android:textColor="#7e7f84"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@id/iv_home_book_plus_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_home_plus_icon2"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/home_weekend_plus_icon"
+                app:layout_constraintLeft_toRightOf="@+id/tv_search_result_receipt"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_search_result_book"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="15dp"
+                android:text="예약"
+                android:textColor="#7e7f84"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@+id/iv_home_plus_icon2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_search_result_non_face"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:text="비대면 진료 "
+                android:textColor="#6488b8"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@+id/tv_search_result_book"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:text="실손보험서류 "
+                android:textColor="#9c8ecc"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toRightOf="@+id/tv_search_result_non_face"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_book_hospital_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
+                android:text=""
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_home_book_plus_icon" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_search_result_day"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_search_result_text_box"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_home_book_hospital_type">
+
+
+                    <ImageView
+                        android:id="@+id/iv_home_book_hospital_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/home_hospital_address_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_search_result_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3km"
+                        android:textSize="10dp"
+                        android:textColor="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/iv_home_book_hospital_address" />
+
+                    <ImageView
+                        android:id="@+id/iv_search_book_hospital_bar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="1dp"
+                        android:src="@drawable/home_hospital_bar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/tv_search_result_distance" />
+
+
+                    <TextView
+                        android:id="@+id/tv_search_result__hospital_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="경기도 성남시 수정구 창곡동"
+                        android:textSize="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toRightOf="@id/iv_search_book_hospital_bar" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_home_book_hospital_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="월요일 09:00~18:30"
+                    android:textColor="@color/black"
+                    android:textSize="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_home_book_hospital_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="13dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:src="@drawable/home_hospital_bar"
+                    app:layout_constraintLeft_toRightOf="@id/tv_home_book_hospital_type"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/tv_home_hospital_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="소아청소년과"
+                    android:textColor="#666769"
+                    android:textSize="10dp"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_home_book_hospital_bar"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search_result_recommend"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cl_hospital_book">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/btn_recommend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/search_result_background"
+                    android:textSize="10dp"
+                    android:text="독감예방접종"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_recommend2"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="3dp"
+                app:layout_constraintLeft_toRightOf="@id/cl_recommend"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/btn_recommend2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/search_result_background"
+                    android:textSize="10dp"
+                    android:text="원스톱진료기관"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_recommend5"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintLeft_toRightOf="@id/cl_recommend2"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/btn_recommend5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/search_result_background"
+                    android:textSize="10dp"
+                    android:text="예방접종"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_recommend6"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintLeft_toRightOf="@id/cl_recommend5"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/btn_recommend6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/search_result_background"
+                    android:textSize="10dp"
+                    android:text="호흡기환자진료센터"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_recommend7"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_recommend"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+                <TextView
+                    android:id="@+id/btn_recommend7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/search_result_background"
+                    android:textSize="10dp"
+                    android:text="재택치료상담처방"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_recommend8"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_recommend2"
+               app:layout_constraintLeft_toRightOf="@id/cl_recommend7">
+
+                <TextView
+                    android:id="@+id/btn_recommend8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/search_result_background"
+                    android:textSize="10dp"
+                    android:text="코로나확진대면진료"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_recommend10"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_recommend6"
+                app:layout_constraintLeft_toRightOf="@id/cl_recommend8">
+
+                <TextView
+                    android:id="@+id/btn_recommend10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/search_result_background"
+                    android:textSize="10dp"
+                    android:text="먹는치료제처방"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_recommend11"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                app:layout_constraintTop_toBottomOf="@id/cl_recommend6"
+                app:layout_constraintLeft_toRightOf="@id/cl_recommend10">
+
+                <TextView
+                    android:id="@+id/btn_recommend11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/search_result_background"
+                    android:textSize="10dp"
+                    android:text="영유아검진"
+                    android:gravity="center"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp"
+            android:background="#f2f2f2"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search_result_text"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="30dp">
+
+            <TextView
+                android:id="@+id/tv_search_result_book2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:gravity="center"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/white"
+                android:text="예약"
+                android:textStyle="bold"
+                android:background="@drawable/search_result_book_background"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+           <TextView
+               android:layout_marginLeft="5dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               app:layout_constraintLeft_toRightOf="@id/cl_search_result_text"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"
+               android:text="수액, 영유아검진 외 2개 예약 가능"
+               android:textColor="@color/black"
+               android:textSize="13dp"/>
+
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

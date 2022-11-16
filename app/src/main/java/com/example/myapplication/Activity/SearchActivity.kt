@@ -3,6 +3,7 @@ package com.example.myapplication.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,6 +44,17 @@ class SearchActivity : AppCompatActivity() {
 
              true
         }
+
+        binding.ivSearchLeftArrow.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            this.startActivity(intent)
+        }
+    }
+
+    override fun onBackPressed() {  // 검색
+        super.onBackPressed()
+//        Log.d("back","눌렸음")
+        finish()
     }
 
     private fun setRecommendList(){

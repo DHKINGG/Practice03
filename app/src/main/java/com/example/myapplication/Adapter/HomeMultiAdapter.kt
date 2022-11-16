@@ -21,7 +21,7 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     var bookList = mutableListOf<HomeReceipt>()
-    var weekendList = mutableListOf<HomeWeekend>()
+    var weekendList = mutableListOf<HomeBookModel>()
     var homeBottomAdList = mutableListOf<HomeBottomAd>()
     var homeAdList = mutableListOf<HomeAd>()
     var homeBookList = mutableListOf<HomeBookModel>()
@@ -77,7 +77,7 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     inner class HomeWeekendHolder(private val binding: IvWeekendHotspitalMultiBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(item:MutableList<HomeWeekend>){
+        fun bind(item:MutableList<HomeBookModel>){
             binding.rvHomeWeekend.layoutManager =
                 LinearLayoutManager(adapterContext, LinearLayoutManager.HORIZONTAL, false)
             val recyclerAdapter = HomeWeekendAdapter()
