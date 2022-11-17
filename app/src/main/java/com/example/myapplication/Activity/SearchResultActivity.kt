@@ -32,6 +32,11 @@ class SearchResultActivity : AppCompatActivity() {
         adapter.searchResultList = searchResultData
         binding.rvSearchResult.adapter = adapter
 
+        binding.ivSearchResultDeleteIcon.setOnClickListener {
+            val intent = Intent(this,SearchActivity::class.java)
+            this.startActivity(intent)
+        }
+
         // intent로 검색어 가져와서 getSearch호출
         val searchKeyWord2 = intent.getStringExtra("Search_Keywords")
         getSearch(searchKeyWord2.toString())

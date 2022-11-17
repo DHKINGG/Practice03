@@ -1,11 +1,15 @@
 package com.example.myapplication.Adapter
 
+import android.R
 import android.content.Context
+import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Model.SearchRecommendModel
 import com.example.myapplication.databinding.IvSearchRecommendBinding
+
 
 class SearchRecommendAdapter : RecyclerView.Adapter<SearchRecommendAdapter.Holder>() {
     private lateinit var adapterContext: Context
@@ -15,6 +19,10 @@ class SearchRecommendAdapter : RecyclerView.Adapter<SearchRecommendAdapter.Holde
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchRecommendModel) {
             binding.btnRecommend.text = item.searchWord
+
+
+
+
 
         }
     }

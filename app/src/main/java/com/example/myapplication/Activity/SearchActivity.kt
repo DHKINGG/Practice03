@@ -34,6 +34,8 @@ class SearchActivity : AppCompatActivity() {
         adapter.searchHistoryList = searchHistoryList
         binding.rvSearch.adapter = adapter
 
+
+
         binding.edtSearchHospital.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
 
@@ -62,20 +64,13 @@ class SearchActivity : AppCompatActivity() {
         searchRecommendList.add(SearchRecommendModel("감기"))
         searchRecommendList.add(SearchRecommendModel("소아청소년과"))
         searchRecommendList.add(SearchRecommendModel("독감예방접종"))
-        searchRecommendList.add(SearchRecommendModel("독감예방접종"))
-        searchRecommendList.add(SearchRecommendModel("독감예방접종"))
-        searchRecommendList.add(SearchRecommendModel("독감예방접종"))
-        searchRecommendList.add(SearchRecommendModel("독감예방접종"))
-        searchRecommendList.add(SearchRecommendModel("독감예방접종"))
-        searchRecommendList.add(SearchRecommendModel("독감예방접종"))
-        searchRecommendList.add(SearchRecommendModel("독감예방접종"))
+
 
     }
 
     private fun setHistoryList(){
-        searchHistoryList.add(SearchHistoryModel("독감예방접종","11.07"))
+        searchHistoryList.add(SearchHistoryModel("금요일진료","11.07"))
         searchHistoryList.add(SearchHistoryModel("토요일진료","10.29"))
         searchHistoryList.add(SearchHistoryModel("독감예방접종","11.29"))
-        searchHistoryList.add(SearchHistoryModel("독감예방접종","01.07"))
     }
 }

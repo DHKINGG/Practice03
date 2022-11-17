@@ -17,6 +17,12 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.Holder>()
             binding.tvSearchWord.text = item.comment
             binding.tvSearchHistoryDate.text = item.data
 
+            binding.ivSearchDel.setOnClickListener {
+                list.removeAt(position)
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, list.size)
+            }
+
 
         }
     }

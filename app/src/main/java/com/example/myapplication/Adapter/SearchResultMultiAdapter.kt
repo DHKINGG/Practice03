@@ -16,6 +16,14 @@ class SearchResultMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     var searchResultList = mutableListOf<SearchModel>()
 
+
+    inner class ResultHeader2Holder(private val binding: IvSearchResultHeader2MultiBinding) :
+    RecyclerView.ViewHolder(binding.root) {
+        fun bind(){
+
+        }
+    }
+
     inner class ResultHeaderHolder(private val binding: IvSearchResultHeaderMutilBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
@@ -31,7 +39,7 @@ class SearchResultMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>
                 LinearLayoutManager(adapterContext, LinearLayoutManager.VERTICAL, false)
             val recyclerAdapter = SearchResultAdapter()
             recyclerAdapter.list = item
-            for(i in item){
+            for (i in item) {
                 Log.d("vvv", i.hospitalName)
 
             }
@@ -44,6 +52,16 @@ class SearchResultMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
             0 -> {
+                return ResultHeader2Holder(
+                    IvSearchResultHeader2MultiBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            }
+
+            1 -> {
                 return ResultHeaderHolder(
                     IvSearchResultHeaderMutilBinding.inflate(
                         LayoutInflater.from(parent.context),
@@ -70,14 +88,15 @@ class SearchResultMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (position) {
-            0 -> (holder as ResultHeaderHolder).bind()
+            0 -> (holder as ResultHeader2Holder).bind()
+            1 -> (holder as ResultHeaderHolder).bind()
             else -> (holder as SearchResultHolder).bind(searchResultList)
         }
         holder.setIsRecyclable(false)
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return 3
     }
 
     fun setContext(context: Context) {
