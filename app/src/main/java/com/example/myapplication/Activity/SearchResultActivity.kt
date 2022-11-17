@@ -52,7 +52,7 @@ class SearchResultActivity : AppCompatActivity() {
 
     private fun getSearch(searchKeyWord: String){
         val api = SearchApi.create()
-        api.getSearchApi(ApiUrlActivity.searchApiKey,"1","1", searchKeyWord).enqueue(object :
+        api.getSearchApi(ApiUrlActivity.searchApiKey,"2","1", searchKeyWord).enqueue(object :
             Callback<ResultCode> {
             override fun onResponse(call: Call<ResultCode>, response: Response<ResultCode>) {
                 val responseSearch = response.body()

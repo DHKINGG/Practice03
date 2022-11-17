@@ -60,10 +60,11 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setRecommendList(){
-        searchRecommendList.add(SearchRecommendModel("독감예방접종"))
+        searchRecommendList.add(SearchRecommendModel("감기"))
         searchRecommendList.add(SearchRecommendModel("감기"))
         searchRecommendList.add(SearchRecommendModel("소아청소년과"))
         searchRecommendList.add(SearchRecommendModel("독감예방접종"))
+
 
 
     }
