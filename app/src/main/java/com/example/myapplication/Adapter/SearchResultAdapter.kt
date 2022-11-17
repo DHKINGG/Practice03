@@ -18,7 +18,8 @@ class SearchResultAdapter : RecyclerView.Adapter<SearchResultAdapter.Holder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchModel) {
 
-
+            binding.tvBookHospitalName.text = item.hospitalName
+            binding.tvSearchResultHospitalAddress.text = item.hospitalAddress
 
 
         }

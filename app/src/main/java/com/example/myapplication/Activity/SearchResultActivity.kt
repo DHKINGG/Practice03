@@ -17,7 +17,7 @@ import retrofit2.Response
 class SearchResultActivity : AppCompatActivity() {
     private lateinit var binding : ActivitySearchResultBinding
     private var searchResultData = mutableListOf<SearchModel>()
-
+    private  var adapter: SearchResultMultiAdapter = SearchResultMultiAdapter()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,7 @@ class SearchResultActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val adapter = SearchResultMultiAdapter()
+
         binding.rvSearchResult.layoutManager = LinearLayoutManager(this)
         adapter.setContext(this)
         adapter.searchResultList = searchResultData
@@ -51,8 +51,6 @@ class SearchResultActivity : AppCompatActivity() {
             Callback<ResultCode> {
             override fun onResponse(call: Call<ResultCode>, response: Response<ResultCode>) {
                 val responseSearch = response.body()
-
-                val adapter = SearchResultMultiAdapter()
 
                 if (responseSearch!=null){
 
