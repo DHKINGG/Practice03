@@ -62,7 +62,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
         binding.rvHome.adapter = adapter
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-        getLastLocation()
+//        getLastLocation()
 
         getHomeBook()
         getWeekend()

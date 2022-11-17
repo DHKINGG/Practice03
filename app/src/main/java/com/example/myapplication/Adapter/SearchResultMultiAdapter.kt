@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,6 +31,10 @@ class SearchResultMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>
                 LinearLayoutManager(adapterContext, LinearLayoutManager.VERTICAL, false)
             val recyclerAdapter = SearchResultAdapter()
             recyclerAdapter.list = item
+            for(i in item){
+                Log.d("vvv", i.hospitalName)
+
+            }
             recyclerAdapter.setContext(adapterContext)
             binding.rvSearchResultMulti.adapter = recyclerAdapter
         }
@@ -38,21 +43,24 @@ class SearchResultMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
-            0 -> { return ResultHeaderHolder(
-                IvSearchResultHeaderMutilBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
+            0 -> {
+                return ResultHeaderHolder(
+                    IvSearchResultHeaderMutilBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
                 )
-            )
-            }else -> { return SearchResultHolder(
-            IvSearchResultMultiBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
-        }
+            }
+            else -> {
+                return SearchResultHolder(
+                    IvSearchResultMultiBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            }
         }
     }
 

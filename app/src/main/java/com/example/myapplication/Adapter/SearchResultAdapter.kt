@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ class SearchResultAdapter : RecyclerView.Adapter<SearchResultAdapter.Holder>() {
     inner class Holder(private val binding: IvSearchResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchModel) {
+
 
 
 
@@ -38,6 +40,7 @@ class SearchResultAdapter : RecyclerView.Adapter<SearchResultAdapter.Holder>() {
     }
 
     override fun getItemCount(): Int {
+        Log.d("vvv", list.size.toString())
         return list.size
     }
 
