@@ -36,7 +36,8 @@ class SearchActivity : AppCompatActivity() {
         setHistoryList()
 
 
-        val adapter = SearchMultiAdapter()
+
+
         binding.rvSearch.layoutManager = LinearLayoutManager(this)
         adapter.setContext(this)
         adapter.searchRecommendList = searchRecommendList

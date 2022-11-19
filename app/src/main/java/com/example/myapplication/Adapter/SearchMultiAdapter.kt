@@ -21,6 +21,7 @@ import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.Model.SearchRecommendModel
 import com.example.myapplication.R
 import com.example.myapplication.databinding.*
+import timber.log.Timber
 
 class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var adapterContext: Context
@@ -179,15 +180,17 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
         return position
+        ///
+
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
+        Timber.d("getSearch() respons")
         if (isSearch) {
             when (position) {
-                0 -> (holder as SearchResultMultiAdapter.ResultHeader2Holder).bind()
-                1 -> (holder as SearchResultMultiAdapter.ResultHeaderHolder).bind()
-                else -> (holder as SearchResultMultiAdapter.SearchResultHolder).bind(
+                0 -> (holder as ResultHeader2Holder).bind()
+                1 -> (holder as ResultHeaderHolder).bind()
+                else -> (holder as SearchResultHolder).bind(
                     searchResultList
                 )
             }
@@ -202,11 +205,15 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun getItemCount(): Int {
-        return 2
+        return if(isSearch) 3
+        else 2
     }
 
     fun setContext(context: Context) {
         adapterContext = context
+    }
+    companion object{
+        private val TAG = "SearchMultiAdapter"
     }
 
 }
