@@ -8,6 +8,7 @@
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/drawable-v24/selected_pager_dot.xml" value="0.2175" />
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/drawable-v24/tab_pager_selector.xml" value="0.2175" />
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/drawable/ad_rounding.xml" value="0.2175" />
+        <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/drawable/address_icon_resize.xml" value="0.2655" />
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/drawable/btn_go_diagnosis.xml" value="0.224" />
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/drawable/edt_rounding.xml" value="0.301" />
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/drawable/gradient_black.xml" value="0.301" />
@@ -52,6 +53,7 @@
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_search_history.xml" value="0.33" />
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_search_history_multi.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_search_recommend.xml" value="0.5" />
+        <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_search_recommend_flow.xml" value="0.75" />
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_search_recommend_multi.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_search_recommned_multi.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/com/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_search_result.xml" value="0.5" />

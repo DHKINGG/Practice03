@@ -9,18 +9,20 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Model.SearchRecommendModel
 import com.example.myapplication.databinding.IvSearchRecommendBinding
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 
 
 class SearchRecommendAdapter : RecyclerView.Adapter<SearchRecommendAdapter.Holder>() {
     private lateinit var adapterContext: Context
     var list = mutableListOf<SearchRecommendModel>()
 
+
     inner class Holder(private val binding: IvSearchRecommendBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchRecommendModel) {
-            binding.btnRecommend.text = item.searchWord
-
-
+            binding.tagSearch.text = item.searchWord
 
 
 

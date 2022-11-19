@@ -21,6 +21,9 @@ import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.Model.SearchRecommendModel
 import com.example.myapplication.R
 import com.example.myapplication.databinding.*
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import timber.log.Timber
 
 class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -38,7 +41,12 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MutableList<SearchRecommendModel>) {
             binding.rvSearchRecommend.layoutManager =
-                LinearLayoutManager(adapterContext, LinearLayoutManager.HORIZONTAL, false)
+               FlexboxLayoutManager(adapterContext).apply {
+                   flexWrap = FlexWrap.WRAP
+                   flexDirection= FlexDirection.ROW
+                   
+               }
+
             val recyclerAdapter = SearchRecommendAdapter()
             recyclerAdapter.list = item
             recyclerAdapter.setContext(adapterContext)
@@ -47,25 +55,13 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             // 1. TextView 참조
             textView = binding.tvSearchRecommend
-
             // 2. String 문자열 데이터 취득
             val textData: String = textView.text.toString()
-
             // 3. SpannableStringBuilder 타입으로 변환
             val builder = SpannableStringBuilder(textData)
-
-//            // 4-1. index=0 에 해당하는 문자열(0)에 볼드체적용
-//            val boldSpan = StyleSpan(Typeface.BOLD)
-//            builder.setSpan(boldSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-//
-//            // 4-2 index=2에 해당하는 문자열(2)에 글자크기 3배 적용
-//            val sizeBigSpan = RelativeSizeSpan(3.0f)
-//            builder.setSpan(sizeBigSpan, 2, 3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
             // 4-3 index=4에 해당하는 문자열(4)에 빨간색 적용
             val colorBlueSpan = ForegroundColorSpan(Color.RED)
             builder.setSpan(colorBlueSpan, 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
             // 5. TextView에 적용
             textView.text = builder
 

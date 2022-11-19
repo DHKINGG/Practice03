@@ -15,9 +15,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SearchResultActivity : AppCompatActivity() {
-    private lateinit var binding : ActivitySearchResultBinding
+    private lateinit var binding: ActivitySearchResultBinding
     private var searchResultData = mutableListOf<SearchModel>()
-    private  var adapter: SearchResultMultiAdapter = SearchResultMultiAdapter()
+    private var adapter: SearchResultMultiAdapter = SearchResultMultiAdapter()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +33,7 @@ class SearchResultActivity : AppCompatActivity() {
         binding.rvSearchResult.adapter = adapter
 
         binding.ivSearchResultDeleteIcon.setOnClickListener {
-            val intent = Intent(this,SearchActivity::class.java)
+            val intent = Intent(this, SearchActivity::class.java)
             this.startActivity(intent)
         }
 
@@ -41,7 +41,7 @@ class SearchResultActivity : AppCompatActivity() {
         val searchKeyWord2 = intent.getStringExtra("Search_Keywords")
         getSearch(searchKeyWord2.toString())
 
-        binding.ivSearchLeftArrow.setOnClickListener{
+        binding.ivSearchLeftArrow.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             this.startActivity(intent)
         }
@@ -49,15 +49,14 @@ class SearchResultActivity : AppCompatActivity() {
     }
 
 
-
-    private fun getSearch(searchKeyWord: String){
+    private fun getSearch(searchKeyWord: String) {
         val api = SearchApi.create()
-        api.getSearchApi(ApiUrlActivity.searchApiKey,"2","1", searchKeyWord).enqueue(object :
+        api.getSearchApi(ApiUrlActivity.searchApiKey, "2", "1", searchKeyWord).enqueue(object :
             Callback<ResultCode> {
             override fun onResponse(call: Call<ResultCode>, response: Response<ResultCode>) {
                 val responseSearch = response.body()
 
-                if (responseSearch!=null){
+                if (responseSearch != null) {
 
                     searchResultData = responseSearch.resultList
                     adapter.searchResultList = searchResultData
