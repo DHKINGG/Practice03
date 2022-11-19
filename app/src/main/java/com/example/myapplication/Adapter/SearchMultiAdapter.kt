@@ -10,23 +10,28 @@ import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.StyleSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Model.SearchHistoryModel
+import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.Model.SearchRecommendModel
 import com.example.myapplication.R
-import com.example.myapplication.databinding.IvSearchHistoryMultiBinding
-import com.example.myapplication.databinding.IvSearchRecommnedMultiBinding
+import com.example.myapplication.databinding.*
 
 class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var adapterContext: Context
     var searchRecommendList = mutableListOf<SearchRecommendModel>()
     var searchHistoryList = mutableListOf<SearchHistoryModel>()
+    var searchResultList = mutableListOf<SearchModel>()
 
     lateinit var textView: TextView
+
+    var isSearch = false
+
 
     inner class RecommendHolder(private val binding: IvSearchRecommnedMultiBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -37,7 +42,6 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             recyclerAdapter.list = item
             recyclerAdapter.setContext(adapterContext)
             binding.rvSearchRecommend.adapter = recyclerAdapter
-
 
 
             // 1. TextView 참조
@@ -65,10 +69,39 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             textView.text = builder
 
 
+        }
+    }
 
 
+    inner class ResultHeader2Holder(private val binding: IvSearchResultHeader2MultiBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind() {
+
+        }
+    }
+
+    inner class ResultHeaderHolder(private val binding: IvSearchResultHeaderMutilBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind() {
 
 
+        }
+    }
+
+
+    inner class SearchResultHolder(private val binding: IvSearchResultMultiBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: MutableList<SearchModel>) {
+            binding.rvSearchResultMulti.layoutManager =
+                LinearLayoutManager(adapterContext, LinearLayoutManager.VERTICAL, false)
+            val recyclerAdapter = SearchResultAdapter()
+            recyclerAdapter.list = item
+            for (i in item) {
+                Log.d("vvv", i.hospitalName)
+
+            }
+            recyclerAdapter.setContext(adapterContext)
+            binding.rvSearchResultMulti.adapter = recyclerAdapter
         }
     }
 
@@ -86,36 +119,87 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        when (viewType) {
-            0 -> { return RecommendHolder(
-                    IvSearchRecommnedMultiBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
+
+        if (isSearch) {
+            when (viewType) {
+                0 -> {
+                    return ResultHeader2Holder(
+                        IvSearchResultHeader2MultiBinding.inflate(
+                            LayoutInflater.from(parent.context),
+                            parent,
+                            false
+                        )
                     )
-                )
-            }else -> { return SearchHistoryHolder(
-                    IvSearchHistoryMultiBinding.inflate(
-                        LayoutInflater.from(parent.context),
-                        parent,
-                        false
+                }
+
+                1 -> {
+                    return ResultHeaderHolder(
+                        IvSearchResultHeaderMutilBinding.inflate(
+                            LayoutInflater.from(parent.context),
+                            parent,
+                            false
+                        )
                     )
-                )
+                }
+                else -> {
+                    return SearchResultHolder(
+                        IvSearchResultMultiBinding.inflate(
+                            LayoutInflater.from(parent.context),
+                            parent,
+                            false
+                        )
+                    )
+                }
+            }
+        } else {
+            when (viewType) {
+                0 -> {
+                    return RecommendHolder(
+                        IvSearchRecommnedMultiBinding.inflate(
+                            LayoutInflater.from(parent.context),
+                            parent,
+                            false
+                        )
+                    )
+                }
+                else -> {
+                    return SearchHistoryHolder(
+                        IvSearchHistoryMultiBinding.inflate(
+                            LayoutInflater.from(parent.context),
+                            parent,
+                            false
+                        )
+                    )
+                }
             }
         }
+
     }
 
-        override fun getItemViewType(position: Int): Int {
-            return position
-        }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (position) {
-            0 -> (holder as RecommendHolder).bind(searchRecommendList)
-            else -> (holder as SearchHistoryHolder).bind(searchHistoryList)
+
+        if (isSearch) {
+            when (position) {
+                0 -> (holder as SearchResultMultiAdapter.ResultHeader2Holder).bind()
+                1 -> (holder as SearchResultMultiAdapter.ResultHeaderHolder).bind()
+                else -> (holder as SearchResultMultiAdapter.SearchResultHolder).bind(
+                    searchResultList
+                )
+            }
+        } else {
+            when (position) {
+                0 -> (holder as RecommendHolder).bind(searchRecommendList)
+                else -> (holder as SearchHistoryHolder).bind(searchHistoryList)
+            }
+            holder.setIsRecyclable(false)
         }
-        holder.setIsRecyclable(false)
     }
+
 
     override fun getItemCount(): Int {
         return 2

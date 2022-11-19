@@ -18,7 +18,7 @@ class SearchResultMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>
 
 
     inner class ResultHeader2Holder(private val binding: IvSearchResultHeader2MultiBinding) :
-    RecyclerView.ViewHolder(binding.root) {
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(){
 
         }
@@ -104,4 +104,3 @@ class SearchResultMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 }
-

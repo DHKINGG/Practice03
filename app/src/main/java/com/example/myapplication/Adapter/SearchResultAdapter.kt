@@ -14,6 +14,8 @@ class SearchResultAdapter : RecyclerView.Adapter<SearchResultAdapter.Holder>() {
     lateinit var adapterContext: Context
     var list = mutableListOf<SearchModel>()
 
+
+
     inner class Holder(private val binding: IvSearchResultBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: SearchModel) {
