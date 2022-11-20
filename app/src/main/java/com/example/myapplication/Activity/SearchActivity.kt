@@ -37,8 +37,6 @@ class SearchActivity : AppCompatActivity() {
     private var adapter: SearchMultiAdapter = SearchMultiAdapter()
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -69,13 +67,11 @@ class SearchActivity : AppCompatActivity() {
         }
 
         binding.ivSearchLeftArrow.setOnClickListener {
-
             if (adapter.isSearch) {
-                val intent = Intent(this, SearchActivity::class.java)
-                this.startActivity(intent)
+                adapter.isSearch = false
+                adapter.notifyDataSetChanged()
             } else {
-                val intent = Intent(this, MainActivity::class.java)
-                this.startActivity(intent)
+                finish()
             }
         }
     }

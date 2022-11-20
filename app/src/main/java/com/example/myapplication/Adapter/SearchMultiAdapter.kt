@@ -2,14 +2,9 @@ package com.example.myapplication.Adapter
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
-import android.text.Spannable
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
-import android.text.style.RelativeSizeSpan
-import android.text.style.StyleSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -19,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Model.SearchHistoryModel
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.Model.SearchRecommendModel
-import com.example.myapplication.R
 import com.example.myapplication.databinding.*
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -41,11 +35,11 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MutableList<SearchRecommendModel>) {
             binding.rvSearchRecommend.layoutManager =
-               FlexboxLayoutManager(adapterContext).apply {
-                   flexWrap = FlexWrap.WRAP
-                   flexDirection= FlexDirection.ROW
-                   
-               }
+                FlexboxLayoutManager(adapterContext).apply {
+                    flexWrap = FlexWrap.WRAP
+                    flexDirection = FlexDirection.ROW
+
+                }
 
             val recyclerAdapter = SearchRecommendAdapter()
             recyclerAdapter.list = item
@@ -201,14 +195,15 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
     override fun getItemCount(): Int {
-        return if(isSearch) 3
+        return if (isSearch) 3
         else 2
     }
 
     fun setContext(context: Context) {
         adapterContext = context
     }
-    companion object{
+
+    companion object {
         private val TAG = "SearchMultiAdapter"
     }
 
