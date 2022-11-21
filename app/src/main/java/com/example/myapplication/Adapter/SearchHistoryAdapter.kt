@@ -4,23 +4,28 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Model.SearchHistoryModel
+import com.example.myapplication.Activity.ApiUrlActivity
+import com.example.myapplication.Model.CurrentSearchModel
 import com.example.myapplication.databinding.IvSearchHistoryBinding
 
 class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.Holder>() {
     lateinit var adapterContext: Context
-    var list = mutableListOf<SearchHistoryModel>()
+    var list = mutableListOf<CurrentSearchModel>()
 
     inner class Holder(private val binding: IvSearchHistoryBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: SearchHistoryModel) {
-            binding.tvSearchWord.text = item.comment
-            binding.tvSearchHistoryDate.text = item.data
+        fun bind(item: CurrentSearchModel) {
+            binding.tvSearchWord.text = item.searchKeyWords
+            binding.tvSearchHistoryDate.text = item.date
 
             binding.ivSearchDel.setOnClickListener {
                 list.removeAt(position)
-                notifyItemRemoved(position)
-                notifyItemRangeChanged(position, list.size)
+                notifyDataSetChanged()
+
+                var searchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey) //sp 에 저장된 값 가져와
+                if (searchList == null) searchList = mutableListOf()
+                searchList.removeAt(position)
+                ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey, searchList)
             }
 
 

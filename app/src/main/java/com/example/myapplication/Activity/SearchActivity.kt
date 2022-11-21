@@ -1,30 +1,21 @@
 package com.example.myapplication.Activity
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
-import android.view.inputmethod.InputMethod
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Adapter.SearchMultiAdapter
-import com.example.myapplication.Adapter.SearchRecommendAdapter
 import com.example.myapplication.Api.SearchApi
-import com.example.myapplication.Model.ResultCode
-import com.example.myapplication.Model.SearchHistoryModel
-import com.example.myapplication.Model.SearchModel
-import com.example.myapplication.Model.SearchRecommendModel
+import com.example.myapplication.Model.*
 import com.example.myapplication.databinding.ActivitySearchBinding
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.gms.common.api.Api
+
+
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,7 +23,7 @@ import retrofit2.Response
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private var searchRecommendList = mutableListOf<SearchRecommendModel>()
-    private var searchHistoryList = mutableListOf<SearchHistoryModel>()
+    private var currentSearchList = mutableListOf<CurrentSearchModel>()
     private var searchResultData = mutableListOf<SearchModel>()
     private var adapter: SearchMultiAdapter = SearchMultiAdapter()
 
@@ -43,16 +34,23 @@ class SearchActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         setRecommendList()
-        setHistoryList()
 
+        currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
+        if (currentSearchList == null) {
+            currentSearchList = mutableListOf()
+
+        }
 
 
 
         binding.rvSearch.layoutManager = LinearLayoutManager(this)
         adapter.setContext(this)
         adapter.searchRecommendList.addAll(searchRecommendList)
-        adapter.searchHistoryList.addAll(searchHistoryList)
+        adapter.searchHistoryList.clear()
+        adapter.searchHistoryList.addAll(currentSearchList)
         binding.rvSearch.adapter = adapter
+
+
 
 
 
@@ -60,21 +58,35 @@ class SearchActivity : AppCompatActivity() {
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
                 getSearch(binding.edtSearchHospital.text.toString())
                 binding.edtSearchHospital.hideKeyboard()
-
+                var currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
+                if (currentSearchList == null) {
+                    currentSearchList = mutableListOf()
+                }
+                currentSearchList.add(CurrentSearchModel(binding.edtSearchHospital.text.toString(),""))
+                ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey,currentSearchList )
             }
-
             true
         }
+
+
+
+
+
 
         binding.ivSearchLeftArrow.setOnClickListener {
             if (adapter.isSearch) {
                 adapter.isSearch = false
+                adapter.searchHistoryList.clear()
+                var currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
+                if (currentSearchList == null) {
+                    currentSearchList = mutableListOf()
+                }
+                adapter.searchHistoryList.addAll(currentSearchList)
                 adapter.notifyDataSetChanged()
-            } else {
-                finish()
-            }
+            } else finish()
         }
     }
+
 
     private fun getSearch(searchKeyWord: String) {
         val api = SearchApi.create()
@@ -89,6 +101,7 @@ class SearchActivity : AppCompatActivity() {
                     adapter.searchResultList = searchResultData
                     adapter.notifyDataSetChanged()
 
+
                 }
             }
 
@@ -98,6 +111,7 @@ class SearchActivity : AppCompatActivity() {
         })
     }
 
+
     private fun View.hideKeyboard() {
         val inputManager =
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -105,9 +119,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
 
-    override fun onBackPressed() {  // 검색
+    override fun onBackPressed() {
         super.onBackPressed()
-//        Log.d("back","눌렸음")
         finish()
     }
 
@@ -127,9 +140,5 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
-    private fun setHistoryList() {
-        searchHistoryList.add(SearchHistoryModel("금요일진료", "11.07"))
-        searchHistoryList.add(SearchHistoryModel("토요일진료", "10.29"))
-        searchHistoryList.add(SearchHistoryModel("독감예방접종", "11.29"))
-    }
+
 }

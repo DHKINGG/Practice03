@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Model.SearchHistoryModel
+import com.example.myapplication.Model.CurrentSearchModel
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.Model.SearchRecommendModel
 import com.example.myapplication.databinding.*
@@ -23,7 +23,7 @@ import timber.log.Timber
 class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var adapterContext: Context
     var searchRecommendList = mutableListOf<SearchRecommendModel>()
-    var searchHistoryList = mutableListOf<SearchHistoryModel>()
+    var searchHistoryList = mutableListOf<CurrentSearchModel>()
     var searchResultList = mutableListOf<SearchModel>()
 
     lateinit var textView: TextView
@@ -98,7 +98,7 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class SearchHistoryHolder(private val binding: IvSearchHistoryMultiBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: MutableList<SearchHistoryModel>) {
+        fun bind(item: MutableList<CurrentSearchModel>) {
             binding.rvSearchHistory.layoutManager =
                 LinearLayoutManager(adapterContext, LinearLayoutManager.VERTICAL, false)
             val recyclerAdapter = SearchHistoryAdapter()
@@ -189,8 +189,9 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 0 -> (holder as RecommendHolder).bind(searchRecommendList)
                 else -> (holder as SearchHistoryHolder).bind(searchHistoryList)
             }
-            holder.setIsRecyclable(false)
+
         }
+        holder.setIsRecyclable(false)
     }
 
 

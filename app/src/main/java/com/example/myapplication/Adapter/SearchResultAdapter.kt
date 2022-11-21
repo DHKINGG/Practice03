@@ -5,9 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Model.SearchHistoryModel
 import com.example.myapplication.Model.SearchModel
-import com.example.myapplication.databinding.IvSearchHistoryBinding
 import com.example.myapplication.databinding.IvSearchResultBinding
 
 class SearchResultAdapter : RecyclerView.Adapter<SearchResultAdapter.Holder>() {
