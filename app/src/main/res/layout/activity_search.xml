@@ -50,6 +50,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_search_headers2"
             android:layout_width="match_parent"
             android:layout_height="80dp"
             app:layout_constraintTop_toBottomOf="@+id/cl_search_header">

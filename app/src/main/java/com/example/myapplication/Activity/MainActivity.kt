@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-     fun replaceFragment(fragment: Fragment) {
+     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(binding.flMainHome.id, fragment).commit()
     }
 

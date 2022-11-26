@@ -1,5 +1,6 @@
 package com.example.myapplication.Activity
 
+
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -8,14 +9,13 @@ import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Adapter.SearchMultiAdapter
 import com.example.myapplication.Api.SearchApi
 import com.example.myapplication.Model.*
 import com.example.myapplication.databinding.ActivitySearchBinding
-import com.google.android.gms.common.api.Api
-
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,6 +64,7 @@ class SearchActivity : AppCompatActivity() {
                 }
                 currentSearchList.add(CurrentSearchModel(binding.edtSearchHospital.text.toString(),""))
                 ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey,currentSearchList )
+
             }
             true
         }
