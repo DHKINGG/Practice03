@@ -59,12 +59,11 @@ class SearchActivity : AppCompatActivity() {
                 getSearch(binding.edtSearchHospital.text.toString())
                 binding.edtSearchHospital.hideKeyboard()
                 var currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
-                if (currentSearchList == null) {
-                    currentSearchList = mutableListOf()
+                if (currentSearchList == null) { currentSearchList = mutableListOf()
                 }
-                currentSearchList.add(CurrentSearchModel(binding.edtSearchHospital.text.toString(),""))
-                ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey,currentSearchList )
-
+                currentSearchList.add(CurrentSearchModel(binding.edtSearchHospital.text.toString(), ""))
+                ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey, currentSearchList)
+                animateSearchKeyWords()
             }
             true
         }
@@ -75,6 +74,9 @@ class SearchActivity : AppCompatActivity() {
 
 
         binding.ivSearchLeftArrow.setOnClickListener {
+
+            binding.clRelativeKeywords.visibility = View.GONE
+
             if (adapter.isSearch) {
                 adapter.isSearch = false
                 adapter.searchHistoryList.clear()
@@ -110,6 +112,17 @@ class SearchActivity : AppCompatActivity() {
                 Log.d("data", t.message.toString())
             }
         })
+    }
+
+    private fun animateSearchKeyWords() {
+
+        if (binding.clRelativeKeywords.visibility == View.VISIBLE) {
+            binding.clRelativeKeywords.visibility = View.GONE
+            binding.clRelativeKeywords.animate().setDuration(200).rotation(180f)
+        } else {
+            binding.clRelativeKeywords.visibility = View.VISIBLE
+            binding.clRelativeKeywords.animate().setDuration(2000).rotation(0f)
+        }
     }
 
 

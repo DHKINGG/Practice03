@@ -1,9 +1,11 @@
 package com.example.myapplication.Activity
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -23,6 +25,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
 
+        title = "KotlinApp"
+        val window: Window = this@MainActivity.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = ContextCompat.getColor(this@MainActivity, R.color.white)
 
 
         // transaction : 작업의 단위
@@ -41,7 +48,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-     private fun replaceFragment(fragment: Fragment) {
+
+    private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction().replace(binding.flMainHome.id, fragment).commit()
     }
 

@@ -10,6 +10,9 @@ android {
         enabled = true
     }
 
+
+
+
     defaultConfig {
         applicationId "com.example.myapplication"
         minSdk 27
@@ -58,5 +61,7 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:5.0.1'
     implementation 'com.google.android.material:material:1.0.0-beta01'
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
+    implementation "com.github.skydoves:expandablelayout:1.0.7"
+
 
 }
