@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f6f7f9"
     android:orientation="vertical"
-    tools:context=".Activity.SearchResultActivity">
+    android:id="@+id/search_result_layout"
+    tools:context=".Activity.SearchActivity">
+
+    <LinearLayout
+        android:id="@+id/ll_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_header3"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_search_header"
@@ -71,12 +81,14 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_header44"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="100dp"
             android:background="@color/white"
             app:layout_constraintTop_toBottomOf="@+id/cl_search_header">
 
             <View
+                android:id="@+id/view_line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginBottom="2dp"
@@ -85,6 +97,7 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_test_set"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -155,6 +168,7 @@
 
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_setting2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginRight="15dp"
@@ -195,5 +209,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/white"/>
+    </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

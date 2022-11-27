@@ -25,11 +25,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
 
-        title = "KotlinApp"
-        val window: Window = this@MainActivity.window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.statusBarColor = ContextCompat.getColor(this@MainActivity, R.color.white)
+//        title = "KotlinApp"
+//        val window: Window = this@MainActivity.window
+//        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+//        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+//        window.statusBarColor = ContextCompat.getColor(this@MainActivity, R.color.black)
 
 
         // transaction : 작업의 단위
