@@ -1,30 +1,24 @@
 package com.example.myapplication.Activity
 
 
-import android.R.attr.popupLayout
 import android.content.Context
 import android.os.Bundle
-import android.transition.AutoTransition
+import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.util.Log
-import android.view.Gravity
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.Transformation
+import android.view.animation.AccelerateInterpolator
 import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.dynamicanimation.animation.FloatPropertyCompat
-import androidx.dynamicanimation.animation.SpringAnimation
-import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Adapter.SearchMultiAdapter
 import com.example.myapplication.Api.SearchApi
+import com.example.myapplication.CustomView.RelationCustomView
 import com.example.myapplication.Model.*
-import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivitySearchBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,6 +31,10 @@ class SearchActivity : AppCompatActivity() {
     private var currentSearchList = mutableListOf<CurrentSearchModel>()
     private var searchResultData = mutableListOf<SearchModel>()
     private var adapter: SearchMultiAdapter = SearchMultiAdapter()
+    private lateinit var relationCustomView: RelationCustomView
+
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,28 +45,13 @@ class SearchActivity : AppCompatActivity() {
         setRecommendList()
 
 
-        val constraintSet1 = ConstraintSet()
-        constraintSet1.clone(binding.constraintLayout)
-
-        val constraintSet2 = ConstraintSet()
-        constraintSet2.clone(this, R.layout.activity_search_result)
-
-        var changed = false
-
-
-
-
-
-
+        relationCustomView = RelationCustomView(this)
 
 
 
 
         currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
-        if (currentSearchList == null) {
-            currentSearchList = mutableListOf()
-
-        }
+        if (currentSearchList == null) {currentSearchList = mutableListOf() }
 
 
 
@@ -81,17 +64,10 @@ class SearchActivity : AppCompatActivity() {
 
 
 
-
-
         binding.edtSearchHospital.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
 
-                val transition = AutoTransition()
-                transition.duration = 1000
-                TransitionManager.beginDelayedTransition(binding.constraintLayout, transition)
-                val constraint = if (changed) constraintSet1 else constraintSet2
-                constraint.applyTo(binding.constraintLayout)
-                changed = !changed
+                animationCustom()
 
                 getSearch(binding.edtSearchHospital.text.toString())
                 binding.edtSearchHospital.hideKeyboard()
@@ -100,34 +76,29 @@ class SearchActivity : AppCompatActivity() {
                 currentSearchList.add(CurrentSearchModel(binding.edtSearchHospital.text.toString(), ""))
                 ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey, currentSearchList)
 
-                animateSearchKeyWords()
+
                 floatingButton()
 
             }
             true
         }
 
-
-
-
-
-
         binding.ivSearchLeftArrow.setOnClickListener {
-
+            floatingButton()
             binding.clRelativeKeywords.visibility = View.GONE
             if (adapter.isSearch) {
+                animationCustom()
                 adapter.isSearch = false
                 adapter.searchHistoryList.clear()
-                var currentSearchList =
-                    ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
-                if (currentSearchList == null) {
-                    currentSearchList = mutableListOf()
-                }
+                var currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
+                if (currentSearchList == null) { currentSearchList = mutableListOf() }
                 adapter.searchHistoryList.addAll(currentSearchList)
                 adapter.notifyDataSetChanged()
             } else finish()
         }
     }
+
+
 
 
     private fun getSearch(searchKeyWord: String) {
@@ -152,39 +123,20 @@ class SearchActivity : AppCompatActivity() {
             }
         })
     }
-
-
-    private fun animateSearchKeyWords() {
-
-        if (binding.clRelativeKeywords.visibility == View.VISIBLE) {
-            binding.clRelativeKeywords.visibility = View.GONE
-            binding.clRelativeKeywords.animate().setDuration(200).rotation(180f)
-        } else {
-            binding.clRelativeKeywords.visibility = View.VISIBLE
-            binding.clRelativeKeywords.animate().setDuration(2000).rotation(0f)
-        }
-    }
-
-
     private fun floatingButton() {
         if (binding.searchResultFab.visibility == View.VISIBLE)
             binding.searchResultFab.visibility = View.GONE
         else binding.searchResultFab.visibility = View.VISIBLE
     }
-
-
     private fun View.hideKeyboard() {
         val inputManager =
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
-
-
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
     }
-
     private fun setRecommendList() {
         searchRecommendList.add(SearchRecommendModel("독감예방접종"))
         searchRecommendList.add(SearchRecommendModel("감기"))
@@ -199,6 +151,20 @@ class SearchActivity : AppCompatActivity() {
         searchRecommendList.add(SearchRecommendModel("호흡기환자진료센터"))
 
 
+    }
+    private fun animationCustom(){
+        val constraintSet = ConstraintSet()   // 셋
+        val constraintLayout = binding.clHeader // 해당  레이아웃에있는 뷰 바인딩해와
+        constraintSet.clone(constraintLayout) // 셋으로 컨스레이아웃 클론(바뀔 레이아웃)
+
+        if(adapter.isSearch) binding.llHeader.removeView(relationCustomView)// isSearch 로 뷰 띄울지 여부 판단
+        else binding.llHeader.addView(relationCustomView)
+
+        constraintSet.applyTo(constraintLayout)  //적용
+
+        val trans = ChangeBounds()
+        trans.interpolator = AccelerateInterpolator()
+        TransitionManager.beginDelayedTransition(binding.clHeader, trans) // 애니메이션 효과
     }
 
 
