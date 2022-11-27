@@ -1,30 +1,24 @@
 package com.example.myapplication.Activity
 
 
-import android.R.attr.popupLayout
 import android.content.Context
 import android.os.Bundle
-import android.transition.AutoTransition
+import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.util.Log
-import android.view.Gravity
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.Transformation
+import android.view.animation.AccelerateInterpolator
 import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.dynamicanimation.animation.FloatPropertyCompat
-import androidx.dynamicanimation.animation.SpringAnimation
-import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Adapter.SearchMultiAdapter
 import com.example.myapplication.Api.SearchApi
 import com.example.myapplication.Model.*
-import com.example.myapplication.R
+import com.example.myapplication.View.RelationCustomView
 import com.example.myapplication.databinding.ActivitySearchBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,7 +31,36 @@ class SearchActivity : AppCompatActivity() {
     private var currentSearchList = mutableListOf<CurrentSearchModel>()
     private var searchResultData = mutableListOf<SearchModel>()
     private var adapter: SearchMultiAdapter = SearchMultiAdapter()
+    private lateinit var relationCustomView: RelationCustomView
 
+    fun sibalsarki() {
+        val constraintSet = ConstraintSet()
+        val constraintLayout = binding.clHeader
+
+        constraintSet.clone(constraintLayout)
+
+        if (adapter.isSearch) {
+            binding.llHeader.removeView(relationCustomView)
+        } else {
+            binding.llHeader.addView(relationCustomView)
+        }
+
+        constraintSet.applyTo(constraintLayout)
+
+        val trans = ChangeBounds()
+        trans.interpolator = AccelerateInterpolator()
+        TransitionManager.beginDelayedTransition(binding.clHeader, trans)
+    }
+
+    fun test(visibility: Int) {
+        val constraintSet = ConstraintSet()
+        val constraintLayout = binding.clHeader
+
+        constraintSet.clone(constraintLayout)
+
+
+        constraintSet.applyTo(constraintLayout)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,17 +69,7 @@ class SearchActivity : AppCompatActivity() {
         setContentView(view)
         setRecommendList()
 
-
-        val constraintSet1 = ConstraintSet()
-        constraintSet1.clone(binding.constraintLayout)
-
-        val constraintSet2 = ConstraintSet()
-        constraintSet2.clone(this, R.layout.activity_search_result)
-
-        var changed = false
-
-
-
+        relationCustomView = RelationCustomView(this)
 
 
 
@@ -86,12 +99,7 @@ class SearchActivity : AppCompatActivity() {
         binding.edtSearchHospital.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
 
-                val transition = AutoTransition()
-                transition.duration = 1000
-                TransitionManager.beginDelayedTransition(binding.constraintLayout, transition)
-                val constraint = if (changed) constraintSet1 else constraintSet2
-                constraint.applyTo(binding.constraintLayout)
-                changed = !changed
+                sibalsarki()
 
                 getSearch(binding.edtSearchHospital.text.toString())
                 binding.edtSearchHospital.hideKeyboard()
@@ -100,7 +108,6 @@ class SearchActivity : AppCompatActivity() {
                 currentSearchList.add(CurrentSearchModel(binding.edtSearchHospital.text.toString(), ""))
                 ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey, currentSearchList)
 
-                animateSearchKeyWords()
                 floatingButton()
 
             }
@@ -113,9 +120,9 @@ class SearchActivity : AppCompatActivity() {
 
 
         binding.ivSearchLeftArrow.setOnClickListener {
-
-            binding.clRelativeKeywords.visibility = View.GONE
+//            binding.clRelativeKeywords.visibility = View.GONE
             if (adapter.isSearch) {
+                sibalsarki()
                 adapter.isSearch = false
                 adapter.searchHistoryList.clear()
                 var currentSearchList =
@@ -151,18 +158,6 @@ class SearchActivity : AppCompatActivity() {
                 Log.d("data", t.message.toString())
             }
         })
-    }
-
-
-    private fun animateSearchKeyWords() {
-
-        if (binding.clRelativeKeywords.visibility == View.VISIBLE) {
-            binding.clRelativeKeywords.visibility = View.GONE
-            binding.clRelativeKeywords.animate().setDuration(200).rotation(180f)
-        } else {
-            binding.clRelativeKeywords.visibility = View.VISIBLE
-            binding.clRelativeKeywords.animate().setDuration(2000).rotation(0f)
-        }
     }
 
 
