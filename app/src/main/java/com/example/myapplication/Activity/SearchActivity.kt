@@ -2,6 +2,7 @@ package com.example.myapplication.Activity
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
@@ -12,7 +13,6 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Adapter.SearchMultiAdapter
@@ -47,9 +47,6 @@ class SearchActivity : AppCompatActivity() {
 
         relationCustomView = RelationCustomView(this)
 
-
-
-
         currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
         if (currentSearchList == null) {currentSearchList = mutableListOf() }
 
@@ -64,27 +61,27 @@ class SearchActivity : AppCompatActivity() {
 
 
 
+
+
         binding.edtSearchHospital.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
 
                 animationCustom()
-
                 getSearch(binding.edtSearchHospital.text.toString())
                 binding.edtSearchHospital.hideKeyboard()
+
                 var currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
                 if (currentSearchList == null) {currentSearchList = mutableListOf()}
                 currentSearchList.add(CurrentSearchModel(binding.edtSearchHospital.text.toString(), ""))
                 ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey, currentSearchList)
-
-
                 floatingButton()
 
             }
             true
         }
-
         binding.ivSearchLeftArrow.setOnClickListener {
             floatingButton()
+            binding.edtSearchHospital.text = null
             binding.clRelativeKeywords.visibility = View.GONE
             if (adapter.isSearch) {
                 animationCustom()
@@ -96,14 +93,22 @@ class SearchActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             } else finish()
         }
+        binding.searchResultFab.setOnClickListener {
+            val intent = Intent(this, MapActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
+
+
 
 
 
 
     private fun getSearch(searchKeyWord: String) {
         val api = SearchApi.create()
-        api.getSearchApi(ApiUrlActivity.searchApiKey, "2", "1", searchKeyWord).enqueue(object :
+        api.getSearchApi(ApiUrlActivity.searchApiKey, "5", "1", searchKeyWord).enqueue(object :
             Callback<ResultCode> {
             override fun onResponse(call: Call<ResultCode>, response: Response<ResultCode>) {
                 val responseSearch = response.body()
@@ -111,7 +116,7 @@ class SearchActivity : AppCompatActivity() {
                 if (responseSearch != null) {
                     adapter.isSearch = true
                     searchResultData = responseSearch.resultList
-                    adapter?.searchResultList = searchResultData
+                    adapter.searchResultList = searchResultData
                     adapter.notifyDataSetChanged()
 
 

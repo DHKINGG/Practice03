@@ -39,6 +39,8 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     flexWrap = FlexWrap.WRAP
                     flexDirection = FlexDirection.ROW
 
+
+
                 }
 
             val recyclerAdapter = SearchRecommendAdapter()
@@ -99,8 +101,7 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class SearchHistoryHolder(private val binding: IvSearchHistoryMultiBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: MutableList<CurrentSearchModel>) {
-            binding.rvSearchHistory.layoutManager =
-                LinearLayoutManager(adapterContext, LinearLayoutManager.VERTICAL, false)
+            binding.rvSearchHistory.layoutManager = LinearLayoutManager(adapterContext, LinearLayoutManager.VERTICAL, false)
             val recyclerAdapter = SearchHistoryAdapter()
             recyclerAdapter.list = item
             recyclerAdapter.setContext(adapterContext)

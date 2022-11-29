@@ -48,7 +48,9 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.Holder>()
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return if(list.size > 5){
+            return 5
+        }else list.size
     }
 
     fun setContext(context: Context) {
