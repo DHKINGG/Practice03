@@ -19,6 +19,7 @@ import com.example.myapplication.Adapter.SearchMultiAdapter
 import com.example.myapplication.Api.SearchApi
 import com.example.myapplication.CustomView.RelationCustomView
 import com.example.myapplication.Model.*
+import com.example.myapplication.Interface.SetOnClickListenerInterface
 import com.example.myapplication.databinding.ActivitySearchBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,6 +46,17 @@ class SearchActivity : AppCompatActivity() {
         setRecommendList()
 
 
+        adapter.listItemClick(object: SetOnClickListenerInterface {
+            override fun listItemClickListener(searchKey: String) {
+                Log.d("dddd","zzzzz")
+                getSearch(searchKey)
+            }
+
+        })
+
+
+
+
         relationCustomView = RelationCustomView(this)
 
         currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
@@ -58,6 +70,7 @@ class SearchActivity : AppCompatActivity() {
         adapter.searchHistoryList.clear()
         adapter.searchHistoryList.addAll(currentSearchList)
         binding.rvSearch.adapter = adapter
+
 
 
 
@@ -114,6 +127,7 @@ class SearchActivity : AppCompatActivity() {
                 val responseSearch = response.body()
 
                 if (responseSearch != null) {
+                    Log.d("sss", searchKeyWord)
                     adapter.isSearch = true
                     searchResultData = responseSearch.resultList
                     adapter.searchResultList = searchResultData
@@ -171,6 +185,8 @@ class SearchActivity : AppCompatActivity() {
         trans.interpolator = AccelerateInterpolator()
         TransitionManager.beginDelayedTransition(binding.clHeader, trans) // 애니메이션 효과
     }
+
+
 
 
 }

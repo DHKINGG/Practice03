@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Model.CurrentSearchModel
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.Model.SearchRecommendModel
+import com.example.myapplication.Interface.SetOnClickListenerInterface
 import com.example.myapplication.databinding.*
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -25,6 +26,11 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var searchRecommendList = mutableListOf<SearchRecommendModel>()
     var searchHistoryList = mutableListOf<CurrentSearchModel>()
     var searchResultList = mutableListOf<SearchModel>()
+    private var onClickListener : SetOnClickListenerInterface? = null
+
+    fun listItemClick(pOnclick: SetOnClickListenerInterface){
+        this.onClickListener = pOnclick
+    }
 
     lateinit var textView: TextView
 
@@ -106,6 +112,8 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             recyclerAdapter.list = item
             recyclerAdapter.setContext(adapterContext)
             binding.rvSearchHistory.adapter = recyclerAdapter
+            onClickListener?.let { recyclerAdapter.listItemClick(it) }
+
         }
     }
 
