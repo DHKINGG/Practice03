@@ -26,6 +26,9 @@ import com.example.myapplication.databinding.ActivitySearchBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class SearchActivity : AppCompatActivity() {
@@ -124,7 +127,6 @@ class SearchActivity : AppCompatActivity() {
                 val responseSearch = response.body()
 
 
-
                 if (responseSearch != null) {
                     Log.d("eee", responseSearch.resultCode.toString())
                     if(responseSearch.resultCode == 3){
@@ -136,6 +138,9 @@ class SearchActivity : AppCompatActivity() {
                     Log.d("aaaa",responseSearch.toString() )
                     var currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
                     if (currentSearchList == null) {currentSearchList = mutableListOf()}
+
+                    var now = LocalDate.now()
+                    var setNow = now.format(DateTimeFormatter.ofPattern("MM.dd"))
 
                     var isExist = false
                     var checkIndex = -1
@@ -151,7 +156,7 @@ class SearchActivity : AppCompatActivity() {
 
                     }
                     var setList = mutableListOf<CurrentSearchModel>()
-                    setList.add(CurrentSearchModel(searchKeyWord , ""))
+                    setList.add(CurrentSearchModel(searchKeyWord , setNow))
                     for(i in currentSearchList){
                         setList.add(i)
                     }
