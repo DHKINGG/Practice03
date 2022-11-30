@@ -27,17 +27,19 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.Holder>()
         fun bind(item: CurrentSearchModel) {
             binding.tvSearchWord.text = item.searchKeyWords
             binding.tvSearchHistoryDate.text = item.date
+
+
+
+
             binding.ivSearchDel.setOnClickListener {
                 list.removeAt(position)
                 notifyDataSetChanged()
 
-                var searchList =
-                    ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey) //sp 에 저장된 값 가져와
+                var searchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey) //sp 에 저장된 값 가져와
                 if (searchList == null) searchList = mutableListOf()
                 searchList.removeAt(position)
                 ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey, searchList)
             }
-
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 binding.clSearchResultHistory.setOnClickListener {
                     Log.d("sss", binding.tvSearchWord.toString())

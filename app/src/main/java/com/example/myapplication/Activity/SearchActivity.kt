@@ -3,6 +3,7 @@ package com.example.myapplication.Activity
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Insets.add
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
@@ -12,6 +13,7 @@ import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -38,6 +40,8 @@ class SearchActivity : AppCompatActivity() {
 
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -58,7 +62,6 @@ class SearchActivity : AppCompatActivity() {
 
 
         relationCustomView = RelationCustomView(this)
-
         currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
         if (currentSearchList == null) {currentSearchList = mutableListOf() }
 
@@ -79,19 +82,12 @@ class SearchActivity : AppCompatActivity() {
         binding.edtSearchHospital.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
 
-                animationCustom()
                 getSearch(binding.edtSearchHospital.text.toString())
                 binding.edtSearchHospital.hideKeyboard()
-
-                var currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
-                if (currentSearchList == null) {currentSearchList = mutableListOf()}
-                currentSearchList.add(CurrentSearchModel(binding.edtSearchHospital.text.toString(), ""))
-                ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey, currentSearchList)
-                floatingButton()
-
             }
             true
         }
+
         binding.ivSearchLeftArrow.setOnClickListener {
             floatingButton()
             binding.edtSearchHospital.text = null
@@ -101,11 +97,12 @@ class SearchActivity : AppCompatActivity() {
                 adapter.isSearch = false
                 adapter.searchHistoryList.clear()
                 var currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
-                if (currentSearchList == null) { currentSearchList = mutableListOf() }
+                if (currentSearchList == null) { currentSearchList = mutableListOf()}
                 adapter.searchHistoryList.addAll(currentSearchList)
                 adapter.notifyDataSetChanged()
             } else finish()
         }
+
         binding.searchResultFab.setOnClickListener {
             val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
@@ -126,8 +123,45 @@ class SearchActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ResultCode>, response: Response<ResultCode>) {
                 val responseSearch = response.body()
 
+
+
                 if (responseSearch != null) {
+                    Log.d("eee", responseSearch.resultCode.toString())
+                    if(responseSearch.resultCode == 3){
+                        Log.d("eee", "예야")
+                        Toast.makeText(this@SearchActivity, "정보가 없습니다",Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
+                    Log.d("aaaa",responseSearch.toString() )
+                    var currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
+                    if (currentSearchList == null) {currentSearchList = mutableListOf()}
+
+                    var isExist = false
+                    var checkIndex = -1
+
+                    for(i in 0 until currentSearchList.size) {
+                        if(searchKeyWord == currentSearchList[i].searchKeyWords) {
+                            isExist = true
+                            checkIndex = i
+                        }
+                    }
+                    if(isExist) {
+                        currentSearchList.removeAt(checkIndex)
+
+                    }
+                    var setList = mutableListOf<CurrentSearchModel>()
+                    setList.add(CurrentSearchModel(searchKeyWord , ""))
+                    for(i in currentSearchList){
+                        setList.add(i)
+                    }
+                    ApiUrlActivity.prefs.setSearchKeyWords(ApiUrlActivity.searchListPrefKey, setList)
+
+
+
+                    floatingButton()
                     Log.d("sss", searchKeyWord)
+                    animationCustom()
                     adapter.isSearch = true
                     searchResultData = responseSearch.resultList
                     adapter.searchResultList = searchResultData
@@ -142,6 +176,7 @@ class SearchActivity : AppCompatActivity() {
             }
         })
     }
+
     private fun floatingButton() {
         if (binding.searchResultFab.visibility == View.VISIBLE)
             binding.searchResultFab.visibility = View.GONE
@@ -171,6 +206,7 @@ class SearchActivity : AppCompatActivity() {
 
 
     }
+
     private fun animationCustom(){
         val constraintSet = ConstraintSet()   // 셋
         val constraintLayout = binding.clHeader // 해당  레이아웃에있는 뷰 바인딩해와
