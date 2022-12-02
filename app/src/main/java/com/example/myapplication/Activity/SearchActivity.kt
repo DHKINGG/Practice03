@@ -29,6 +29,7 @@ import retrofit2.Response
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.logging.Logger
 
 
 class SearchActivity : AppCompatActivity() {
@@ -51,6 +52,8 @@ class SearchActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         setRecommendList()
+
+
 
 
         adapter.listItemClick(object: SetOnClickListenerInterface {
@@ -92,11 +95,12 @@ class SearchActivity : AppCompatActivity() {
         }
 
         binding.ivSearchLeftArrow.setOnClickListener {
-            floatingButton()
+
             binding.edtSearchHospital.text = null
             binding.clRelativeKeywords.visibility = View.GONE
             if (adapter.isSearch) {
                 animationCustom()
+                floatingButton()
                 adapter.isSearch = false
                 adapter.searchHistoryList.clear()
                 var currentSearchList = ApiUrlActivity.prefs.getSearchKeyWords(ApiUrlActivity.searchListPrefKey)
@@ -107,7 +111,11 @@ class SearchActivity : AppCompatActivity() {
         }
 
         binding.searchResultFab.setOnClickListener {
-            val intent = Intent(this, MapActivity::class.java)
+
+            val searchModel = searchResultData[0]
+
+            val intent = Intent(this,MapActivity::class.java )
+            intent.putExtra("object",searchModel)
             startActivity(intent)
         }
 
@@ -164,6 +172,9 @@ class SearchActivity : AppCompatActivity() {
 
 
 
+
+
+
                     floatingButton()
                     Log.d("sss", searchKeyWord)
                     animationCustom()
@@ -183,10 +194,12 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun floatingButton() {
-        if (binding.searchResultFab.visibility == View.VISIBLE)
+        if (adapter.isSearch)
             binding.searchResultFab.visibility = View.GONE
         else binding.searchResultFab.visibility = View.VISIBLE
     }
+
+
     private fun View.hideKeyboard() {
         val inputManager =
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
