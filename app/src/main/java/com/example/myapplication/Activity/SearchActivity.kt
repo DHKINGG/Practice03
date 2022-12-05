@@ -205,7 +205,9 @@ class SearchActivity : AppCompatActivity() {
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
+
     override fun onBackPressed() {
+        Log.d("ppp", "실행완료 ")
         super.onBackPressed()
         finish()
     }

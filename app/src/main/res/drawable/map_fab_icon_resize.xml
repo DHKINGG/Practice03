@@ -2,7 +2,8 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:drawable="@drawable/map_fab_icon_1"
-        android:width="25dp"
-        android:height="25dp">
+        android:width="30dp"
+        android:height="30dp">
+
     </item>
 </layer-list>

@@ -13,6 +13,7 @@ import android.provider.Settings
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
@@ -31,6 +32,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+
 
     private var homeAdData = mutableListOf<HomeAd>()
     private var homeBottomAdData = mutableListOf<HomeBottomAd>()
@@ -111,6 +113,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
 
 
 
+
     private fun setHomeADData() {
         homeAdData.add(HomeAd((R.drawable.home_ad_1)))
         homeAdData.add(HomeAd((R.drawable.home_ad_1)))
@@ -172,6 +175,8 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
     }
 
 
+
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == PERMISSION_ID) {
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
@@ -179,4 +184,6 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
             }
         }
     }
+
+
 }
