@@ -181,6 +181,9 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
+
         <com.naver.maps.map.MapView
             android:id="@+id/map_naver"
             android:layout_width="match_parent"
@@ -190,14 +193,15 @@
 
     </LinearLayout>
 
-    <com.naver.maps.map.widget.LocationButtonView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/search_result_fab_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginRight="15dp"
         android:layout_marginBottom="10dp"
+        android:foreground="@drawable/map_fab_icon_resize"
+        android:foregroundGravity="center"
         app:layout_constraintBottom_toTopOf="@+id/search_result_fab_map2"
-        android:clickable="true"
         app:layout_constraintRight_toRightOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
