@@ -6,25 +6,29 @@ import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Looper
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import androidx.core.app.ActivityCompat
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.databinding.ActivityMapBinding
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
+import com.google.type.DateTime
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
+import java.time.LocalDateTime.now
 
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: ActivityMapBinding
     private lateinit var mapView: MapView
     private lateinit var naverMap: NaverMap
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationSource: FusedLocationSource
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,12 +38,10 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(view)
 
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
 
         mapView = binding.mapNaver
         mapView.getMapAsync(this)
-
 
         val mapBottomInfo = intent.getSerializableExtra("object") as SearchModel
 
@@ -59,28 +61,76 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     override fun onMapReady(map: com.naver.maps.map.NaverMap) {
-        val naverMap = map
+        naverMap = map
         val uiSettings = naverMap.uiSettings
+        val cameraPosition = CameraPosition(LatLng(37.473645, 127.114391), 16.0)
 
+
+        naverMap.cameraPosition = cameraPosition
         naverMap.minZoom = 10.0
-
-
-
 
         naverMap.setOnMapClickListener { point, coord ->
             binding.clBottomInfo.visibility = View.GONE
         }
-
         uiSettings.isLocationButtonEnabled = false
         uiSettings.isZoomControlEnabled = false
         naverMap.locationTrackingMode = LocationTrackingMode.Follow
-        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-        naverMap.locationSource = locationSource
+
+        binding.searchResultFabMap.setOnClickListener {
+            val cameraUpdate = CameraUpdate.scrollTo(LatLng(latitude, longitude))
+            naverMap.moveCamera(cameraUpdate)
+
+            val locationOverlay = naverMap.locationOverlay
+            locationOverlay.isVisible = true
+            locationOverlay.position = LatLng(latitude, longitude)
+            Log.d("ck", locationOverlay.position.toString())
+
+        }
 
 
-        var currentLocation: Location?
+        mapView.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    binding.clBottomInfo.visibility = View.GONE
+                    //터치가 눌리면...
+                }
+            }
+            //리턴값이 false면 seekbar 동작 안됨
+            false //or false
+        }
 
 
+
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(this) //gps 자동으로 받아오기
+        setUpdateLocationListner() //내위치를 가져오는 코드
+
+
+    }
+
+    lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    lateinit var locationCallback: LocationCallback
+
+
+    private fun setUpdateLocationListner() {
+        val locationRequest = LocationRequest.create()
+        locationRequest.run {
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY //높은 정확도
+            interval = 1000 //1초에 한번씩 GPS 요청
+        }
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                for ((i, location) in locationResult.locations.withIndex()) {
+                    Log.d("location: ", "${location.latitude}, ${location.longitude}")
+                    latitude = location.latitude
+                    longitude = location.longitude
+                    setLastLocation(location)
+                }
+            }
+        }
+        //location 요청 함수 호출 (locationRequest, locationCallback)
 
         if (ActivityCompat.checkSelfPermission(
                 this,
@@ -93,55 +143,27 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
             return
         }
-
-        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-            currentLocation = location
-
-            naverMap.locationOverlay.run {
-                isVisible = true
-                position = LatLng(currentLocation!!.latitude, currentLocation!!.longitude)
-            }
-
-            val cameraUpdate = CameraUpdate.scrollTo(
-                LatLng(
-                    currentLocation!!.latitude,
-                    currentLocation!!.longitude
-                )
-            )
-            naverMap.moveCamera(cameraUpdate)
-
-            val cameraUpdateToSeoul =
-                CameraUpdate.scrollTo(LatLng(37.47549389999994, 127.10558120000012))
-
-            binding.searchResultFabMap.setOnClickListener {
-                naverMap.moveCamera(cameraUpdateToSeoul)
-            }
-
-            val marker = Marker()
-            marker.position = LatLng(
-                naverMap.cameraPosition.target.latitude,
-                naverMap.cameraPosition.target.longitude
-            )
-            marker.map = naverMap
-            val marker2 = Marker()
-            val marker3 = Marker()
-            val marker4 = Marker()
-            val marker5 = Marker()
-
-            marker2.position = LatLng(37.47545880000004, 127.10067899999981)
-            marker3.position = LatLng(37.473568699999575, 127.1036674999995)
-            marker4.position = LatLng(37.47323779999989, 127.10212769999973)
-            marker5.position = LatLng(37.47415849999969, 127.11026200000008)
-
-            marker2.map = naverMap
-            marker3.map = naverMap
-            marker4.map = naverMap
-            marker5.map = naverMap
+        fusedLocationProviderClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            Looper.myLooper()
+        )
+    }//좌표계를 주기적으
 
 
-        }
+    fun setLastLocation(location: Location) {
+        val myLocation = LatLng(location.latitude, location.longitude)
+        val marker = Marker()
+        marker.position = myLocation
 
+        marker.map = naverMap
+        //마커
+//        val cameraUpdate = CameraUpdate.scrollTo(myLocation)
+//        naverMap.moveCamera(cameraUpdate)
+        naverMap.maxZoom = 18.0
+        naverMap.minZoom = 5.0
 
+        //marker.map = null
     }
 
 
