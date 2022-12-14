@@ -38,9 +38,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
     private var homeBottomAdData = mutableListOf<HomeBottomAd>()
     private var bookData = mutableListOf<HomeReceipt>()
     private var weekendData = mutableListOf<HomeBookModel>()
-
     private var homeData = mutableListOf<HomeBookModel>()
-
     private var adapter = HomeMultiAdapter()
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -53,8 +51,7 @@ class HomeFragment() : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::in
         setHomeADData()
         setBottomADData()
 
-        binding.rvHome.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvHome.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         adapter.bookList = bookData
         adapter.homeAdList = homeAdData

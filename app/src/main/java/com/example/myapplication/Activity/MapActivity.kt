@@ -88,16 +88,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
 
-        mapView.setOnTouchListener { v, event ->
-            when (event?.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    binding.clBottomInfo.visibility = View.GONE
-                    //터치가 눌리면...
-                }
-            }
-            //리턴값이 false면 seekbar 동작 안됨
-            false //or false
-        }
+
 
 
 

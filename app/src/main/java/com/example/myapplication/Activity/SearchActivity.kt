@@ -4,12 +4,14 @@ package com.example.myapplication.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Insets.add
+import android.graphics.Rect
 import android.os.Bundle
 import android.transition.ChangeBounds
 import android.transition.TransitionManager
 import android.util.Log
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.inputmethod.InputMethodManager
@@ -122,7 +124,22 @@ class SearchActivity : AppCompatActivity() {
 
     }
 
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val focusView = currentFocus
+        if (focusView != null && ev != null) {
+            val rect = Rect()
+            focusView.getGlobalVisibleRect(rect)
+            val x = ev.x.toInt()
+            val y = ev.y.toInt()
 
+            if (!rect.contains(x, y)) {
+                val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                imm?.hideSoftInputFromWindow(focusView.windowToken, 0)
+                focusView.clearFocus()
+            }
+        }
+        return super.dispatchTouchEvent(ev)
+    }
 
 
 
@@ -201,8 +218,7 @@ class SearchActivity : AppCompatActivity() {
 
 
     private fun View.hideKeyboard() {
-        val inputManager =
-            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(windowToken, 0)
     }
 

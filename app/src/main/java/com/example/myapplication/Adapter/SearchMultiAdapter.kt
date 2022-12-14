@@ -114,6 +114,8 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.rvSearchHistory.adapter = recyclerAdapter
             onClickListener?.let { recyclerAdapter.listItemClick(it) }
 
+
+
         }
     }
 

@@ -47,9 +47,6 @@ class HomeMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             binding.vpViewPager.adapter = viewPagerAdapter
 
 
-
-
-
             TabLayoutMediator(binding.tlIndicator, binding.vpViewPager) { tab, position -> }.attach()
 
 

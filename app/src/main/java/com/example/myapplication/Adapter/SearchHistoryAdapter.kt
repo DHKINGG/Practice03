@@ -3,8 +3,10 @@ package com.example.myapplication.Adapter
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Activity.ApiUrlActivity
 import com.example.myapplication.Model.CurrentSearchModel
@@ -27,6 +29,7 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.Holder>()
         fun bind(item: CurrentSearchModel) {
             binding.tvSearchWord.text = item.searchKeyWords
             binding.tvSearchHistoryDate.text = item.date
+
 
 
 
@@ -75,5 +78,7 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.Holder>()
     fun setContext(context: Context) {
         adapterContext = context
     }
+
+
 
 }
