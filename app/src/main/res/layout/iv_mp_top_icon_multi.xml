@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/main">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +31,7 @@
 
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_modift"
             android:layout_width="45dp"
             android:layout_height="30dp"
             android:layout_marginLeft="20dp"
@@ -68,6 +70,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="3"
+                android:scaleType="centerCrop"
                 android:src="@drawable/my_info_alrarm_icon"
                 app:riv_corner_radius="10dp" />
 
@@ -100,6 +103,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="3"
+                android:scaleType="centerCrop"
                 android:src="@drawable/my_info_fam_icon"
                 app:riv_corner_radius="10dp" />
 
@@ -132,6 +136,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="3"
+                android:scaleType="centerCrop"
                 android:src="@drawable/my_info_feed_icon"
                 app:riv_corner_radius="10dp" />
 
@@ -164,6 +169,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="3"
+                android:scaleType="centerCrop"
                 android:src="@drawable/my_info_fav_icon"
                 app:riv_corner_radius="10dp" />
 

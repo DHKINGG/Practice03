@@ -18,6 +18,7 @@ class MyPageManagementAdapter: RecyclerView.Adapter<MyPageManagementAdapter.Hold
 
        fun bind(item:ManagementModel){
            binding.tvManagement.text = item.text
+           binding.viewBar.visibility = item.bar
        }
 
    }

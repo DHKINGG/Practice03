@@ -2,6 +2,7 @@ package com.example.myapplication.Adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Model.DocumentModel
@@ -19,6 +20,7 @@ class MyPageDocumentAdapter : RecyclerView.Adapter<MyPageDocumentAdapter.Holder>
 
         fun bind(item: DocumentModel) {
             binding.tvDocument.text = item.text1
+            binding.viewBar.visibility = item.bar
         }
     }
 

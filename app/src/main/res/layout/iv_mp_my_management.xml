@@ -4,7 +4,7 @@
     android:id="@+id/constraint_layout"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:layout_marginTop="15dp">
+    android:layout_marginTop="5dp">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,8 @@
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -36,7 +37,6 @@
         android:id="@+id/view_bar"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginLeft="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginRight="15dp"
         android:background="#f3f3f3"
