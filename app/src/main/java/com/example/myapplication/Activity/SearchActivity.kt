@@ -48,6 +48,7 @@ class SearchActivity : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySearchBinding.inflate(layoutInflater)
@@ -60,7 +61,7 @@ class SearchActivity : AppCompatActivity() {
 
         adapter.listItemClick(object: SetOnClickListenerInterface {
             override fun listItemClickListener(searchKey: String) {
-                Log.d("dddd","zzzzz")
+
                 getSearch(searchKey)
             }
 

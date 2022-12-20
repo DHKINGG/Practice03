@@ -1,12 +1,11 @@
+
+
 package com.example.myapplication.Adapter
 
 import android.content.Context
 import android.content.Intent
-import android.location.Location
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2

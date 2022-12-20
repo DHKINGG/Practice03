@@ -7,12 +7,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Activity.HospitalInfoActivity
+import com.example.myapplication.Model.HomeBookModel
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.databinding.IvSearchResultBinding
-import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 
 class SearchResultAdapter : RecyclerView.Adapter<SearchResultAdapter.Holder>() {
     lateinit var adapterContext: Context
+    private var searchResultData = mutableListOf<SearchModel>()
     var list = mutableListOf<SearchModel>()
 
 
@@ -25,7 +26,10 @@ class SearchResultAdapter : RecyclerView.Adapter<SearchResultAdapter.Holder>() {
             binding.tvSearchResultHospitalAddress.text = item.hospitalAddress
 
             binding.clHospitalInfo.setOnClickListener {
+
+
                 val intent = Intent(adapterContext, HospitalInfoActivity::class.java)
+                intent.putExtra("object", item)
                 intent.run { adapterContext.startActivity(this) }
             }
         }
