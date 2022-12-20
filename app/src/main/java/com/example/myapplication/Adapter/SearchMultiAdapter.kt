@@ -1,6 +1,7 @@
 package com.example.myapplication.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -9,8 +10,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Activity.HospitalInfoActivity
 import com.example.myapplication.Model.CurrentSearchModel
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.Model.SearchRecommendModel
@@ -19,6 +22,7 @@ import com.example.myapplication.databinding.*
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 import timber.log.Timber
 
 class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -101,6 +105,10 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             recyclerAdapter.setContext(adapterContext)
             binding.rvSearchResultMulti.adapter = recyclerAdapter
+
+
+            
+
         }
     }
 

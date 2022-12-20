@@ -11,7 +11,7 @@ import com.example.myapplication.Model.HomeAd
 import com.example.myapplication.databinding.IvViewPagerPageBinding
 
 
-class HomeAdViewPagerAdapter:   RecyclerView.Adapter<HomeAdViewPagerAdapter.Holder>() {
+class HomeAdViewPagerAdapter: RecyclerView.Adapter<HomeAdViewPagerAdapter.Holder>() {
     var list = mutableListOf<HomeAd>()
     lateinit var adapterContext: Context
 
@@ -23,7 +23,6 @@ class HomeAdViewPagerAdapter:   RecyclerView.Adapter<HomeAdViewPagerAdapter.Hold
                 var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.naver.com"))
                 adapterContext.startActivity(intent)
             }
-
 
 
         }

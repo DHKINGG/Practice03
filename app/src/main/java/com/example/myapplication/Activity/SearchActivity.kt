@@ -112,14 +112,7 @@ class SearchActivity : AppCompatActivity() {
             } else finish()
         }
 
-        binding.searchResultFab.setOnClickListener {
 
-            val searchModel = searchResultData[0]
-
-            val intent = Intent(this,MapActivity::class.java )
-            intent.putExtra("object",searchModel)
-            startActivity(intent)
-        }
 
 
     }

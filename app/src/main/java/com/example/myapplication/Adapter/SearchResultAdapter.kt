@@ -1,12 +1,15 @@
 package com.example.myapplication.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Activity.HospitalInfoActivity
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.databinding.IvSearchResultBinding
+import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 
 class SearchResultAdapter : RecyclerView.Adapter<SearchResultAdapter.Holder>() {
     lateinit var adapterContext: Context
@@ -21,7 +24,10 @@ class SearchResultAdapter : RecyclerView.Adapter<SearchResultAdapter.Holder>() {
             binding.tvBookHospitalName.text = item.hospitalName
             binding.tvSearchResultHospitalAddress.text = item.hospitalAddress
 
-
+            binding.clHospitalInfo.setOnClickListener {
+                val intent = Intent(adapterContext, HospitalInfoActivity::class.java)
+                intent.run { adapterContext.startActivity(this) }
+            }
         }
     }
 

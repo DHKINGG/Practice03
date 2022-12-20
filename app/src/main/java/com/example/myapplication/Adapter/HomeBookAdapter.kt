@@ -1,25 +1,12 @@
 package com.example.myapplication.Adapter
 
-import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.content.Context.LOCATION_SERVICE
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.*
-import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Activity.MapActivity
 import com.example.myapplication.Model.HomeBookModel
 import com.example.myapplication.databinding.IvBookHospitalBinding
-import com.google.android.gms.location.FusedLocationProviderClient
-import java.util.*
 
 class HomeBookAdapter : RecyclerView.Adapter<HomeBookAdapter.Holder>() {
 
