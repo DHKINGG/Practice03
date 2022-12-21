@@ -1,9 +1,12 @@
 package com.example.myapplication.Adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Model.HomeBookModel
@@ -11,13 +14,14 @@ import com.example.myapplication.Model.HospitalInfoViewPager
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.R
 import com.example.myapplication.databinding.*
+import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 
 
 class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     lateinit var adapterContext: Context
     lateinit var hospitalList: SearchModel
     var topViewpager = mutableListOf<HospitalInfoViewPager>()
+    lateinit var recyclerView: RecyclerView
 
     inner class TopInfoHeader(private val binding: IvHospitalInfoTopBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -33,12 +37,17 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class StickyHeader(private val binding: HospitalInfoHeaderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-
+            binding.headerLl1.setOnClickListener {
+                recyclerView.smoothScrollToPosition(1)
+            }
+            binding.headerLl2.setOnClickListener {
+                recyclerView.smoothScrollToPosition(3)
+            }
+            binding.headerLl3.setOnClickListener {
+                recyclerView.smoothScrollToPosition(4)
+            }
         }
     }
-
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
@@ -114,23 +123,5 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun setContext(context: Context) {
         adapterContext = context
-    }
-
-    // 붙일 헤더뷰인지 아닌지
-    fun isHolder(position: Int): Boolean {
-        return position == 1
-    }
-
-    // 헤더 뷰보다 스크롤이 내려와있으면 헤더뷰를 리턴 아니면 리턴 null
-    fun getHeaderLayoutView(list: RecyclerView, position: Int): View? {
-        val lastIndex =
-            if (position < itemCount) position else itemCount - 1
-        for (index in lastIndex downTo 0) {
-            if (index == 1) {
-                return LayoutInflater.from(list.context)
-                    .inflate(R.layout.hospital_info_header, list, false);
-            }
-        }
-        return null
     }
 }
