@@ -2,4 +2,6 @@
     <string name="app_name">My Application</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="client_id">kqdgiy9jr4</string>
+    <string name="client_secret">tVD013jADhk3FrM6G5XsPTMPbDBoHT9ywLq1TwFS</string>
 </resources>

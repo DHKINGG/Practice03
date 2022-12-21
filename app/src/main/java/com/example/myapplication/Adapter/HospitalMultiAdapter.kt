@@ -2,17 +2,19 @@ package com.example.myapplication.Adapter
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.myapplication.Model.HomeBookModel
 import com.example.myapplication.Model.HospitalInfoViewPager
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.R
 import com.example.myapplication.databinding.*
-import com.gun0912.tedpermission.provider.TedPermissionProvider.context
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
+import timber.log.Timber
 
 
 class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -20,6 +22,10 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var hospitalList: SearchModel
     var topViewpager = mutableListOf<HospitalInfoViewPager>()
     lateinit var recyclerView: RecyclerView
+
+    private lateinit var naverMap: NaverMap
+    private lateinit var mapView: MapView
+
 
     inner class TopInfoHeader(private val binding: IvHospitalInfoTopBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -50,7 +56,6 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class HospitalType(private val binding:IvHospitalLocationBinding):
     RecyclerView.ViewHolder(binding.root){
         fun bind(){
-
         }
     }
 
@@ -64,11 +69,24 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class HospitalMap(private val binding:IvHospitalMapBinding):
     RecyclerView.ViewHolder(binding.root){
-        fun bind(){
+        fun bind() {
+            mapView = binding.fragmentContainerMap
+            mapView.getMapAsync { p0 ->
+                Log.d("ssss", "onMapReady")
+                naverMap = p0
 
+                val uiSettings = naverMap.uiSettings
+                val cameraPosition = CameraPosition(LatLng(37.473645, 127.114391), 16.0)
+
+                naverMap.cameraPosition = cameraPosition
+                naverMap.minZoom = 10.0
+
+                uiSettings.isLocationButtonEnabled = false
+                uiSettings.isZoomControlEnabled = false
+                naverMap.locationTrackingMode = LocationTrackingMode.Follow
+            }
         }
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {

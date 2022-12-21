@@ -23,9 +23,5 @@ class ApiUrlActivity : Application() {
     override fun onCreate() {
         prefs = PreferenceUtil(applicationContext)
         super.onCreate()
-
-        // NaverMap SDK
-        NaverMapSdk.getInstance(this).client =
-            NaverMapSdk.NaverCloudPlatformClient("kqdgiy9jr4")
     }
 }
