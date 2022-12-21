@@ -1,6 +1,4 @@
 package com.example.myapplication.Adapter
-
-import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
@@ -49,6 +47,29 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
+    inner class HospitalType(private val binding:IvHospitalLocationBinding):
+    RecyclerView.ViewHolder(binding.root){
+        fun bind(){
+
+        }
+    }
+
+
+    inner class HospitalTime(private val binding:IvHospitalTimeBinding):
+        RecyclerView.ViewHolder(binding.root){
+        fun bind(){
+            binding.clDayTimeTable.clipToOutline = true
+        }
+    }
+
+    inner class HospitalMap(private val binding:IvHospitalMapBinding):
+    RecyclerView.ViewHolder(binding.root){
+        fun bind(){
+
+        }
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (viewType) {
             0 -> {
@@ -72,8 +93,8 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             2 -> {
-                return TopInfoHeader(
-                    IvHospitalInfoTopBinding.inflate(
+                return HospitalType(
+                    IvHospitalLocationBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -81,8 +102,8 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 )
             }
             3 -> {
-                return TopInfoHeader(
-                    IvHospitalInfoTopBinding.inflate(
+                return HospitalTime(
+                    IvHospitalTimeBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -90,8 +111,8 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 )
             }
             else -> {
-                return TopInfoHeader(
-                    IvHospitalInfoTopBinding.inflate(
+                return HospitalMap(
+                    IvHospitalMapBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -110,9 +131,9 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (position) {
             0 -> (holder as HospitalMultiAdapter.TopInfoHeader).bind()
             1 -> (holder as HospitalMultiAdapter.StickyHeader).bind()
-            2 -> (holder as HospitalMultiAdapter.TopInfoHeader).bind()
-            3 -> (holder as HospitalMultiAdapter.TopInfoHeader).bind()
-            else -> (holder as HospitalMultiAdapter.TopInfoHeader).bind()
+            2 -> (holder as HospitalMultiAdapter.HospitalType).bind()
+            3 -> (holder as HospitalMultiAdapter.HospitalTime).bind()
+            else -> (holder as HospitalMultiAdapter.HospitalMap).bind()
         }
         holder.setIsRecyclable(false)
     }

@@ -24,9 +24,11 @@
             android:name=".Activity.HospitalInfoActivity"
             android:exported="false" />
 
-        <meta-data
-            android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="kqdgiy9jr4" />
+<!--        <meta-data-->
+<!--            android:name="com.naver.maps.map.CLIENT_ID"-->
+<!--            android:value="kqdgiy9jr4" >-->
+
+<!--        </meta-data>-->
 
 
         <activity

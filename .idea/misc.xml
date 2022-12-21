@@ -9,6 +9,7 @@
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/drawable/hospital_doctor_tpye_round.xml" value="0.1" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/drawable/hospital_doctor_type_round2.xml" value="0.1" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/drawable/hospital_info_bottom_rounding.xml" value="0.137" />
+        <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/drawable/hospital_sub_info_round.xml" value="0.115" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/drawable/hospital_time_table_round.xml" value="0.1" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/drawable/qr_code_resize.xml" value="0.1115" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/drawable/resize_fab.xml" value="0.1115" />
@@ -20,6 +21,8 @@
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/activity_search.xml" value="0.175" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/activity_search_result.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/fragment_map.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/fragment_map2.xml" value="0.16458333333333333" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/fragment_medical_history.xml" value="0.175" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/fragment_my_page.xml" value="0.175" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/hospital_info_header.xml" value="0.17916666666666667" />
@@ -31,10 +34,12 @@
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_favorite_multi.xml" value="0.175" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_home_ad.xml" value="0.22" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_home_ad2.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_home_ad_multi.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_home_header_mulit.xml" value="0.22" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_hospital_info_top.xml" value="0.22" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_hospital_info_view_pager.xml" value="0.22" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_hospital_location.xml" value="0.22" />
+        <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_hospital_map.xml" value="0.22" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_hospital_time.xml" value="0.22" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_hospital_view_pager_item.xml" value="0.178125" />
         <entry key="..\:/Users/Donghwi/AndroidStudioProjects/Practice03/app/src/main/res/layout/iv_mp_document_multi.xml" value="0.17916666666666667" />
@@ -174,5 +179,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.22" />
+      </ProjectState>
+    </option>
   </component>
 </project>

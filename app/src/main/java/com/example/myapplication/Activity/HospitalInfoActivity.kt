@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Transformations.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Adapter.HospitalMultiAdapter
@@ -15,8 +17,11 @@ import com.example.myapplication.R
 import com.example.myapplication.StickHeader.RecyclerSectionItemDecoration
 
 import com.example.myapplication.databinding.ActivityHospitalInfoBinding
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
 
-class HospitalInfoActivity : AppCompatActivity() {
+class HospitalInfoActivity :FragmentActivity() , OnMapReadyCallback {
 
     private val adapter: HospitalMultiAdapter = HospitalMultiAdapter()
     private lateinit var binding: ActivityHospitalInfoBinding
@@ -28,6 +33,16 @@ class HospitalInfoActivity : AppCompatActivity() {
         binding = ActivityHospitalInfoBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+
+
+        val fm = supportFragmentManager
+        val mapFragment = fm.findFragmentById(R.id.frag_map) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                fm.beginTransaction().add(R.id.frag_map, it).commit()
+            }
+
+        mapFragment.getMapAsync(this)
 
         setTopInfoViewPager()
         hospitalData = intent.getSerializableExtra("object") as SearchModel
@@ -110,5 +125,19 @@ class HospitalInfoActivity : AppCompatActivity() {
         vData.add(HospitalInfoViewPager(R.drawable.home_ad_1))
         vData.add(HospitalInfoViewPager(R.drawable.home_ad_1))
         vData.add(HospitalInfoViewPager(R.drawable.home_ad_1))
+    }
+
+
+    override fun onMapReady(naverMap: NaverMap) {
+        val options = NaverMapOptions()
+            .camera(CameraPosition(LatLng(37.566, 126.978),  10.0))  // 카메라 위치 (위도,경도,줌)
+            .mapType(NaverMap.MapType.Basic)    //지도 유형
+            .enabledLayerGroups(NaverMap.LAYER_GROUP_BUILDING)  //빌딩 표시
+
+        MapFragment.newInstance(options)
+
+        val marker = Marker()
+        marker.position = LatLng(37.566, 126.978)
+        marker.map = naverMap
     }
 }

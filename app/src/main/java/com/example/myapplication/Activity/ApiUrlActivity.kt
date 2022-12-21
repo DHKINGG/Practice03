@@ -2,6 +2,7 @@ package com.example.myapplication.Activity
 
 import android.app.Application
 import com.example.myapplication.Model.PreferenceUtil
+import com.naver.maps.map.NaverMapSdk
 
 class ApiUrlActivity : Application() {
 
@@ -22,5 +23,9 @@ class ApiUrlActivity : Application() {
     override fun onCreate() {
         prefs = PreferenceUtil(applicationContext)
         super.onCreate()
+
+        // NaverMap SDK
+        NaverMapSdk.getInstance(this).client =
+            NaverMapSdk.NaverCloudPlatformClient("kqdgiy9jr4")
     }
 }
