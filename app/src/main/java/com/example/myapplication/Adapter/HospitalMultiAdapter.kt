@@ -84,18 +84,15 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 naverMap = p0
 
                 val uiSettings = naverMap.uiSettings
-                val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.464368299999826,127.10017120000005 ))
-                naverMap.moveCamera(cameraUpdate)
-
-
+                val latLng = LatLng(37.409867, 127.125593)
+//                val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.464368299999826,127.10017120000005 ))
+                val cameraPosition = CameraPosition(latLng, 16.0)
+                naverMap.cameraPosition = cameraPosition
+//                naverMap.moveCamera(cameraUpdate)
 
                 uiSettings.isLocationButtonEnabled = false
                 uiSettings.isZoomControlEnabled = false
                 naverMap.locationTrackingMode = LocationTrackingMode.Follow
-
-
-
-
 
                 binding.tvLocationInfo2.text = item.hospitalAddress
 
