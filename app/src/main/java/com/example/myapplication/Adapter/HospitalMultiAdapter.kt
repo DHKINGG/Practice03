@@ -14,6 +14,8 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.*
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.util.FusedLocationSource
 import timber.log.Timber
 
 
@@ -29,12 +31,17 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class TopInfoHeader(private val binding: IvHospitalInfoTopBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind() {
+        fun bind(item: SearchModel) {
             var viewpagerAdapter = HospitalViewpagerAdapter()
             viewpagerAdapter.list = topViewpager
             viewpagerAdapter.setContext(adapterContext)
             binding.vpViewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             binding.vpViewPager2.adapter = viewpagerAdapter
+
+            binding.tvHospitalName.text = item.hospitalName
+            binding.tvLocation.text = item.hospitalAddress
+
+
         }
     }
 
@@ -55,7 +62,8 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class HospitalType(private val binding:IvHospitalLocationBinding):
     RecyclerView.ViewHolder(binding.root){
-        fun bind(){
+        fun bind(item: SearchModel){
+            binding.tvHospitalSubLocation.text = item.hospitalAddress
         }
     }
 
@@ -69,22 +77,46 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class HospitalMap(private val binding:IvHospitalMapBinding):
     RecyclerView.ViewHolder(binding.root){
-        fun bind() {
+        fun bind(item: SearchModel) {
             mapView = binding.fragmentContainerMap
             mapView.getMapAsync { p0 ->
                 Log.d("ssss", "onMapReady")
                 naverMap = p0
 
                 val uiSettings = naverMap.uiSettings
-                val cameraPosition = CameraPosition(LatLng(37.473645, 127.114391), 16.0)
+                val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.464368299999826,127.10017120000005 ))
+                naverMap.moveCamera(cameraUpdate)
 
-                naverMap.cameraPosition = cameraPosition
-                naverMap.minZoom = 10.0
+
 
                 uiSettings.isLocationButtonEnabled = false
                 uiSettings.isZoomControlEnabled = false
                 naverMap.locationTrackingMode = LocationTrackingMode.Follow
+
+
+
+
+
+                binding.tvLocationInfo2.text = item.hospitalAddress
+
+
             }
+        }
+    }
+
+
+
+    inner class HospitalDiagnosis(private val binding:IvHospitalDiagnosisBinding):
+    RecyclerView.ViewHolder(binding.root){
+        fun bind(){
+
+        }
+    }
+
+    inner class HospitalDiagnosisInfo(private val binding:IvHospitalDiagnosisInfoBinding):
+        RecyclerView.ViewHolder(binding.root){
+        fun bind(){
+
         }
     }
 
@@ -128,9 +160,27 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     )
                 )
             }
-            else -> {
+            4 -> {
                 return HospitalMap(
                     IvHospitalMapBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            }
+            5 -> {
+                return HospitalDiagnosis(
+                    IvHospitalDiagnosisBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false
+                    )
+                )
+            }
+            else -> {
+                return HospitalDiagnosisInfo(
+                    IvHospitalDiagnosisInfoBinding.inflate(
                         LayoutInflater.from(parent.context),
                         parent,
                         false
@@ -141,23 +191,28 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     }
 
+
+
+
     override fun getItemViewType(position: Int): Int {
         return position
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (position) {
-            0 -> (holder as HospitalMultiAdapter.TopInfoHeader).bind()
+            0 -> (holder as HospitalMultiAdapter.TopInfoHeader).bind(hospitalList)
             1 -> (holder as HospitalMultiAdapter.StickyHeader).bind()
-            2 -> (holder as HospitalMultiAdapter.HospitalType).bind()
+            2 -> (holder as HospitalMultiAdapter.HospitalType).bind(hospitalList)
             3 -> (holder as HospitalMultiAdapter.HospitalTime).bind()
-            else -> (holder as HospitalMultiAdapter.HospitalMap).bind()
+            4 -> (holder as HospitalMultiAdapter.HospitalMap).bind(hospitalList)
+            5 -> (holder as HospitalMultiAdapter.HospitalDiagnosis).bind()
+            else -> (holder as HospitalMultiAdapter.HospitalDiagnosisInfo).bind()
         }
         holder.setIsRecyclable(false)
     }
 
     override fun getItemCount(): Int {
-        return 5
+        return 7
     }
 
     fun setContext(context: Context) {

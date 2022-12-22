@@ -32,7 +32,7 @@
             <View
                 android:id="@+id/header_bar1"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="5dp"
                 android:background="@color/white"/>
 
 
@@ -55,7 +55,7 @@
             <View
                 android:id="@+id/header_bar2"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="5dp"
                 android:background="@color/white"/>
 
 
@@ -78,7 +78,7 @@
             <View
                 android:id="@+id/header_bar3"
                 android:layout_width="match_parent"
-                android:layout_height="10dp"
+                android:layout_height="5dp"
                 android:background="@color/white"/>
 
 

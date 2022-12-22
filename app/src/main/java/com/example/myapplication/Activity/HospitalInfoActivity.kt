@@ -20,6 +20,7 @@ import com.example.myapplication.databinding.ActivityHospitalInfoBinding
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.util.FusedLocationSource
 
 class HospitalInfoActivity :AppCompatActivity() {
 
@@ -35,7 +36,12 @@ class HospitalInfoActivity :AppCompatActivity() {
         setContentView(view)
 
 
+
+
+
         setTopInfoViewPager()
+
+
         hospitalData = intent.getSerializableExtra("object") as SearchModel
 
         binding.rvHospitalInfo.layoutManager = LinearLayoutManager(this)
@@ -45,11 +51,15 @@ class HospitalInfoActivity :AppCompatActivity() {
         adapter.recyclerView = binding.rvHospitalInfo
         binding.rvHospitalInfo.adapter = adapter
 
+
+        binding.txtMain.text = hospitalData.hospitalName
+
+
         val sectionItemDecoration = RecyclerSectionItemDecoration(getSectionCallback())
         binding.rvHospitalInfo.addItemDecoration(sectionItemDecoration)
 
         binding.leftArrow.setOnClickListener {
-            binding.rvHospitalInfo.smoothScrollToPosition(3)
+           finish()
         }
 
         binding.headerLl1.setOnClickListener {
@@ -57,14 +67,16 @@ class HospitalInfoActivity :AppCompatActivity() {
             Log.d("sss", "click1")
         }
         binding.headerLl2.setOnClickListener {
-            binding.rvHospitalInfo.smoothScrollToPosition(3)
+            binding.rvHospitalInfo.smoothScrollToPosition(5)
             Log.d("sss", "click2")
         }
         binding.headerLl3.setOnClickListener {
-            binding.rvHospitalInfo.smoothScrollToPosition(4)
+            binding.rvHospitalInfo.smoothScrollToPosition(6)
             Log.d("sss", "click3")
         }
     }
+
+
 
 
     private fun getSectionCallback(): RecyclerSectionItemDecoration.SectionCallback {
@@ -89,17 +101,17 @@ class HospitalInfoActivity :AppCompatActivity() {
                         binding.headerBar2.setBackgroundColor(getColor(R.color.white))
                         binding.headerBar3.setBackgroundColor(getColor(R.color.white))
                     }
-                    in 1..2 -> {
+                    in 1..4 -> {
                         binding.headerBar1.setBackgroundColor(getColor(R.color.black))
                         binding.headerBar2.setBackgroundColor(getColor(R.color.white))
                         binding.headerBar3.setBackgroundColor(getColor(R.color.white))
                     }
-                    3 -> {
+                    5 -> {
                         binding.headerBar1.setBackgroundColor(getColor(R.color.white))
                         binding.headerBar2.setBackgroundColor(getColor(R.color.black))
                         binding.headerBar3.setBackgroundColor(getColor(R.color.white))
                     }
-                    4 -> {
+                    6 -> {
                         binding.headerBar1.setBackgroundColor(getColor(R.color.white))
                         binding.headerBar2.setBackgroundColor(getColor(R.color.white))
                         binding.headerBar3.setBackgroundColor(getColor(R.color.black))
@@ -111,6 +123,8 @@ class HospitalInfoActivity :AppCompatActivity() {
 
         }
     }
+
+
 
     private fun setTopInfoViewPager() {
         vData.add(HospitalInfoViewPager(R.drawable.home_ad_1))

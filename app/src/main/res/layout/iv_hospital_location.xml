@@ -66,6 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_hospital_location">
 
         <TextView
+            android:id="@+id/tv_hospital_sub_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="경기도 성남시분당구 야탑로81번길 10 307호 (야탑동,아미고타워) 에 위치한내과 입니다."
