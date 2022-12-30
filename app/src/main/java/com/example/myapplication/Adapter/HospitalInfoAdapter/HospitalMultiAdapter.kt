@@ -1,11 +1,10 @@
-package com.example.myapplication.Adapter
+package com.example.myapplication.Adapter.HospitalInfoAdapter
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myapplication.Model.HospitalInfoViewPager
@@ -13,10 +12,12 @@ import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.R
 import com.example.myapplication.databinding.*
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.*
+import com.naver.maps.map.CameraPosition
+import com.naver.maps.map.LocationTrackingMode
+import com.naver.maps.map.MapView
+import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.util.FusedLocationSource
-import timber.log.Timber
+import com.naver.maps.map.overlay.OverlayImage
 
 
 class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -24,7 +25,6 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var hospitalList: SearchModel
     var topViewpager = mutableListOf<HospitalInfoViewPager>()
     lateinit var recyclerView: RecyclerView
-
     private lateinit var naverMap: NaverMap
     private lateinit var mapView: MapView
 
@@ -37,9 +37,10 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             viewpagerAdapter.setContext(adapterContext)
             binding.vpViewPager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             binding.vpViewPager2.adapter = viewpagerAdapter
-
             binding.tvHospitalName.text = item.hospitalName
             binding.tvLocation.text = item.hospitalAddress
+
+
 
 
         }
@@ -52,10 +53,10 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 recyclerView.smoothScrollToPosition(1)
             }
             binding.headerLl2.setOnClickListener {
-                recyclerView.smoothScrollToPosition(3)
+                recyclerView.smoothScrollToPosition(5)
             }
             binding.headerLl3.setOnClickListener {
-                recyclerView.smoothScrollToPosition(4)
+                recyclerView.smoothScrollToPosition(6)
             }
         }
     }
@@ -77,14 +78,17 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class HospitalMap(private val binding:IvHospitalMapBinding):
     RecyclerView.ViewHolder(binding.root){
+        @SuppressLint("ClickableViewAccessibility")
         fun bind(item: SearchModel) {
-            mapView = binding.fragmentContainerMap
+            mapView = binding.vMapView
             mapView.getMapAsync { p0 ->
                 Log.d("ssss", "onMapReady")
                 naverMap = p0
 
+
+
                 val uiSettings = naverMap.uiSettings
-                val latLng = LatLng(37.409867, 127.125593)
+                val latLng = LatLng(36.334207, 127.372298)
 //                val cameraUpdate = CameraUpdate.scrollTo(LatLng(37.464368299999826,127.10017120000005 ))
                 val cameraPosition = CameraPosition(latLng, 16.0)
                 naverMap.cameraPosition = cameraPosition
@@ -95,6 +99,26 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 naverMap.locationTrackingMode = LocationTrackingMode.Follow
 
                 binding.tvLocationInfo2.text = item.hospitalAddress
+
+                val marker = Marker()
+                marker.position = latLng
+                marker.map = naverMap
+                marker.icon = OverlayImage.fromResource(R.drawable.marker_resize)
+                marker.width = Marker.SIZE_AUTO
+                marker.height = Marker.SIZE_AUTO
+
+                mapView.setOnTouchListener { v, event ->
+                    when (event.action) {
+                        MotionEvent.ACTION_MOVE -> recyclerView.requestDisallowInterceptTouchEvent(
+                            true
+                        )
+                        MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> recyclerView.requestDisallowInterceptTouchEvent(
+                            false
+                        )
+                    }
+                    mapView.onTouchEvent(event)
+                }
+                binding.clMapView.clipToOutline = true
 
 
             }
@@ -197,13 +221,13 @@ class HospitalMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (position) {
-            0 -> (holder as HospitalMultiAdapter.TopInfoHeader).bind(hospitalList)
-            1 -> (holder as HospitalMultiAdapter.StickyHeader).bind()
-            2 -> (holder as HospitalMultiAdapter.HospitalType).bind(hospitalList)
-            3 -> (holder as HospitalMultiAdapter.HospitalTime).bind()
-            4 -> (holder as HospitalMultiAdapter.HospitalMap).bind(hospitalList)
-            5 -> (holder as HospitalMultiAdapter.HospitalDiagnosis).bind()
-            else -> (holder as HospitalMultiAdapter.HospitalDiagnosisInfo).bind()
+            0 -> (holder as TopInfoHeader).bind(hospitalList)
+            1 -> (holder as StickyHeader).bind()
+            2 -> (holder as HospitalType).bind(hospitalList)
+            3 -> (holder as HospitalTime).bind()
+            4 -> (holder as HospitalMap).bind(hospitalList)
+            5 -> (holder as HospitalDiagnosis).bind()
+            else -> (holder as HospitalDiagnosisInfo).bind()
         }
         holder.setIsRecyclable(false)
     }

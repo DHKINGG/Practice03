@@ -1,4 +1,4 @@
-package com.example.myapplication.Adapter
+package com.example.myapplication.Adapter.SearchAdapter
 
 import android.content.Context
 import android.graphics.Color
@@ -11,15 +11,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Interface.SetOnClickListenerInterface
 import com.example.myapplication.Model.CurrentSearchModel
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.Model.SearchRecommendModel
-import com.example.myapplication.Interface.SetOnClickListenerInterface
 import com.example.myapplication.databinding.*
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.gun0912.tedpermission.provider.TedPermissionProvider.context
 import timber.log.Timber
 
 class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -102,6 +101,8 @@ class SearchMultiAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
             recyclerAdapter.setContext(adapterContext)
             binding.rvSearchResultMulti.adapter = recyclerAdapter
+
+
 
 
             

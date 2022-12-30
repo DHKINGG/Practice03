@@ -1,6 +1,6 @@
 
 
-package com.example.myapplication.Adapter
+package com.example.myapplication.Adapter.HomeAdpter
 
 import android.content.Context
 import android.content.Intent

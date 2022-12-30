@@ -1,16 +1,14 @@
-package com.example.myapplication.Adapter
+package com.example.myapplication.Adapter.SearchAdapter
 
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Activity.ApiUrlActivity
-import com.example.myapplication.Model.CurrentSearchModel
 import com.example.myapplication.Interface.SetOnClickListenerInterface
+import com.example.myapplication.Model.CurrentSearchModel
 import com.example.myapplication.databinding.IvSearchHistoryBinding
 
 class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.Holder>() {
@@ -55,7 +53,7 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.Holder>()
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHistoryAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(
             IvSearchHistoryBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -65,7 +63,7 @@ class SearchHistoryAdapter : RecyclerView.Adapter<SearchHistoryAdapter.Holder>()
         )
     }
 
-    override fun onBindViewHolder(holder: SearchHistoryAdapter.Holder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(list[position])
     }
 

@@ -2,25 +2,15 @@ package com.example.myapplication.Fragment
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
-import android.content.Context.LOCATION_SERVICE
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationManager
-import android.provider.Settings
 import android.util.Log
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.location.LocationManagerCompat.isLocationEnabled
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.Activity.ApiUrlActivity
-import com.example.myapplication.Adapter.HomeMultiAdapter
+import com.example.myapplication.Adapter.HomeAdpter.HomeMultiAdapter
 import com.example.myapplication.Api.HomeBookApi
 import com.example.myapplication.Model.*
 import com.example.myapplication.R

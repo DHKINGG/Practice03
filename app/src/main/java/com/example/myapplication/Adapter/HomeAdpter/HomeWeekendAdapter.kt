@@ -1,4 +1,4 @@
-package com.example.myapplication.Adapter
+package com.example.myapplication.Adapter.HomeAdpter
 
 import android.content.Context
 import android.util.Log
@@ -30,7 +30,7 @@ class HomeWeekendAdapter : RecyclerView.Adapter<HomeWeekendAdapter.Holder>() {
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeWeekendAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(
             IvWeekendHotspitalBinding.inflate(
                 LayoutInflater.from(parent.context),

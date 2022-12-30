@@ -1,4 +1,4 @@
-package com.example.myapplication.Adapter
+package com.example.myapplication.Adapter.SearchAdapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Activity.HospitalInfoActivity
-import com.example.myapplication.Model.HomeBookModel
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.databinding.IvSearchResultBinding
 
@@ -31,12 +30,13 @@ class SearchResultAdapter : RecyclerView.Adapter<SearchResultAdapter.Holder>() {
                 val intent = Intent(adapterContext, HospitalInfoActivity::class.java)
                 intent.putExtra("object", item)
                 intent.run { adapterContext.startActivity(this) }
+
             }
         }
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(
             IvSearchResultBinding.inflate(
                 LayoutInflater.from(parent.context),

@@ -1,12 +1,10 @@
-package com.example.myapplication.Adapter
+package com.example.myapplication.Adapter.HospitalInfoAdapter
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Model.HospitalInfoViewPager
-import com.example.myapplication.R
 import com.example.myapplication.databinding.IvHospitalViewPagerBinding
 
 class HospitalViewpagerAdapter: RecyclerView.Adapter<HospitalViewpagerAdapter.Holder>() {
@@ -24,7 +22,7 @@ class HospitalViewpagerAdapter: RecyclerView.Adapter<HospitalViewpagerAdapter.Ho
 
 
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int):Holder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         return Holder(
             IvHospitalViewPagerBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
@@ -34,7 +32,7 @@ class HospitalViewpagerAdapter: RecyclerView.Adapter<HospitalViewpagerAdapter.Ho
         )
     }
 
-    override fun onBindViewHolder(holder: Holder , position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(list[position], position)
     }
 

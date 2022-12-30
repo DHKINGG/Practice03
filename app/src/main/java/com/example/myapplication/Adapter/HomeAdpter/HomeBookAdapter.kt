@@ -1,4 +1,4 @@
-package com.example.myapplication.Adapter
+package com.example.myapplication.Adapter.HomeAdpter
 
 import android.content.Context
 import android.location.*
@@ -38,7 +38,7 @@ class HomeBookAdapter : RecyclerView.Adapter<HomeBookAdapter.Holder>() {
 
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeBookAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(
             IvBookHospitalBinding.inflate(
                 LayoutInflater.from(parent.context),

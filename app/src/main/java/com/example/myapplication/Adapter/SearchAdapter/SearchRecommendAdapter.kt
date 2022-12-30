@@ -1,20 +1,11 @@
-package com.example.myapplication.Adapter
+package com.example.myapplication.Adapter.SearchAdapter
 
-import android.R
 import android.content.Context
-import android.content.Intent
-import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Activity.SearchActivity
 import com.example.myapplication.Model.SearchRecommendModel
 import com.example.myapplication.databinding.IvSearchRecommendBinding
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
-import com.google.android.flexbox.FlexboxLayoutManager
 
 
 class SearchRecommendAdapter : RecyclerView.Adapter<SearchRecommendAdapter.Holder>() {
@@ -34,7 +25,7 @@ class SearchRecommendAdapter : RecyclerView.Adapter<SearchRecommendAdapter.Holde
 
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchRecommendAdapter.Holder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(
             IvSearchRecommendBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -46,7 +37,7 @@ class SearchRecommendAdapter : RecyclerView.Adapter<SearchRecommendAdapter.Holde
 
 
 
-    override fun onBindViewHolder(holder: SearchRecommendAdapter.Holder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(list[position])
     }
 

@@ -13,8 +13,7 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomeBinding
 import com.example.myapplication.databinding.FragmentMedicalHistoryBinding
 
-class MedicalHistoryFragment :
-    BaseFragment<FragmentMedicalHistoryBinding>(FragmentMedicalHistoryBinding::inflate) {
+class MedicalHistoryFragment : BaseFragment<FragmentMedicalHistoryBinding>(FragmentMedicalHistoryBinding::inflate) {
 
 
     override fun initView() {

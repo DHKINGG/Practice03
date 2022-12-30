@@ -2,8 +2,6 @@ package com.example.myapplication.Activity
 
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Insets.add
 import android.graphics.Rect
 import android.os.Bundle
 import android.transition.ChangeBounds
@@ -19,19 +17,17 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myapplication.Adapter.SearchMultiAdapter
+import com.example.myapplication.Adapter.SearchAdapter.SearchMultiAdapter
 import com.example.myapplication.Api.SearchApi
 import com.example.myapplication.CustomView.RelationCustomView
-import com.example.myapplication.Model.*
 import com.example.myapplication.Interface.SetOnClickListenerInterface
+import com.example.myapplication.Model.*
 import com.example.myapplication.databinding.ActivitySearchBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.logging.Logger
 
 
 class SearchActivity : AppCompatActivity() {

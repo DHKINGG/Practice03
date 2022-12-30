@@ -3,24 +3,16 @@ package com.example.myapplication.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Transformations.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Adapter.HospitalMultiAdapter
-import com.example.myapplication.Model.HomeBookModel
+import com.example.myapplication.Adapter.HospitalInfoAdapter.HospitalMultiAdapter
 import com.example.myapplication.Model.HospitalInfoViewPager
 import com.example.myapplication.Model.SearchModel
 import com.example.myapplication.R
 import com.example.myapplication.StickHeader.RecyclerSectionItemDecoration
 
 import com.example.myapplication.databinding.ActivityHospitalInfoBinding
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.*
-import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.util.FusedLocationSource
 
 class HospitalInfoActivity :AppCompatActivity() {
 
@@ -40,6 +32,10 @@ class HospitalInfoActivity :AppCompatActivity() {
 
 
         setTopInfoViewPager()
+
+
+
+
 
 
         hospitalData = intent.getSerializableExtra("object") as SearchModel
@@ -127,8 +123,9 @@ class HospitalInfoActivity :AppCompatActivity() {
 
 
     private fun setTopInfoViewPager() {
-        vData.add(HospitalInfoViewPager(R.drawable.home_ad_1))
-        vData.add(HospitalInfoViewPager(R.drawable.home_ad_1))
-        vData.add(HospitalInfoViewPager(R.drawable.home_ad_1))
+
+        vData.add(HospitalInfoViewPager(R.drawable.vp_1))
+        vData.add(HospitalInfoViewPager(R.drawable.vp_2))
+        vData.add(HospitalInfoViewPager(R.drawable.vp_3))
     }
 }

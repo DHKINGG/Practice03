@@ -1,11 +1,10 @@
-package com.example.myapplication.Adapter
+package com.example.myapplication.Adapter.HospitalInfoAdapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Model.HomeBookModel
-import com.example.myapplication.Model.HospitalInfoViewPager
 import com.example.myapplication.databinding.IvHospitalInfoTopBinding
 
 
@@ -25,7 +24,7 @@ class HospitalInfoTopInfAdapter : RecyclerView.Adapter<HospitalInfoTopInfAdapter
 
 
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): HospitalInfoTopInfAdapter.Holder {
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         return  Holder(
             IvHospitalInfoTopBinding.inflate(
                 LayoutInflater.from(viewGroup.context),
@@ -35,7 +34,7 @@ class HospitalInfoTopInfAdapter : RecyclerView.Adapter<HospitalInfoTopInfAdapter
         )
     }
 
-    override fun onBindViewHolder(holder: HospitalInfoTopInfAdapter.Holder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(list[position], position)
     }
 
